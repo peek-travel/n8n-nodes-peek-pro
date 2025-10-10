@@ -1,0 +1,52 @@
+# Node & package management
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+dist/
+coverage/
+.tmp/
+.cache/
+*.tsbuildinfo
+
+# Local n8n dev data
+.n8n/
+.n8nignore
+
+# Environment / credentials
+.env
+.env.local
+credentials.json
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# macOS and Windows junk
+Icon?
+ehthumbs.db
+desktop.ini
+
+# Compiled source
+*.js.map
+*.d.ts
+
+# Optional: ignore test snapshots if you use Jest
+__snapshots__/
