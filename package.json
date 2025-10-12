@@ -4,9 +4,17 @@
   "description": "n8n community node to work with the Example API",
   "license": "MIT",
   "homepage": "https://example.com",
-  "keywords": ["n8n-community-node-package"],
-  "author": { "name": "Oskar Bruening", "email": "oskar@peek.com" },
-  "repository": { "type": "git", "url": "" },
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "author": {
+    "name": "Oskar Bruening",
+    "email": "oskar@peek.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "scripts": {
     "build": "n8n-node build",
     "build:watch": "tsc --watch",
@@ -16,18 +24,28 @@
     "release": "n8n-node release",
     "prepublishOnly": "n8n-node prerelease"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "n8n": {
     "n8nNodesApiVersion": 1,
-    "credentials": ["dist/credentials/PeekProApi.credentials.js"],
-    "nodes": ["dist/nodes/PeekPro/PeekPro.node.js"]
+    "credentials": [
+      "dist/credentials/PeekProApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/PeekPro/PeekPro.node.js"
+    ]
   },
   "devDependencies": {
     "@n8n/node-cli": "*",
     "eslint": "9.32.0",
+    "n8n-core": "^1.114.0",
+    "n8n-workflow": "^1.112.0",
     "prettier": "3.6.2",
     "release-it": "^19.0.4",
     "typescript": "5.9.2"
   },
-  "peerDependencies": { "n8n-workflow": "*" }
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
 }

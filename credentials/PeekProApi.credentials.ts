@@ -1,3 +1,4 @@
+import { PEEK_PRO_BASE_URL } from '../constants/peekPro.constants';
 import type {
 	IAuthenticateGeneric,
 	ICredentialTestRequest,
@@ -35,8 +36,9 @@ export class PeekProApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://n8n.peeklabs.com',
-			url: '/v1/user',
+			baseURL: PEEK_PRO_BASE_URL,
+			url: '/ping',
+			method: 'GET',
 		},
 	};
 }
