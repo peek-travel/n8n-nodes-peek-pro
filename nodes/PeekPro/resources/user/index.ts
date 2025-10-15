@@ -1,5 +1,4 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { userCreateDescription } from './create';
 import { userGetDescription } from './get';
 
 const showOnlyForUsers = {
@@ -40,21 +39,8 @@ export const userDescription: INodeProperties[] = [
 					},
 				},
 			},
-			{
-				name: 'Create',
-				value: 'create',
-				action: 'Create a new user',
-				description: 'Create a new user',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '/users',
-					},
-				},
-			},
 		],
 		default: 'getAll',
 	},
 	...userGetDescription,
-	...userCreateDescription,
 ];
