@@ -15,7 +15,7 @@ export const accountDescription: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Get Current',
+				name: 'Get Current Account',
 				value: 'getCurrent',
 				action: 'Get current account',
 				description: 'Get the current account information',
