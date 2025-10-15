@@ -37,7 +37,7 @@ export class PeekProApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: PEEK_PRO_BASE_URL,
-			url: '/ping',
+			url: '/v1/ping',
 			method: 'GET',
 		},
 	};

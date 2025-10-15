@@ -2,6 +2,7 @@ import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 // import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { userDescription } from './resources/user';
+import { accountDescription } from './resources/account';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -32,12 +33,17 @@ export class PeekPro implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Account',
+						value: 'account',
+					},
+					{
 						name: 'User',
 						value: 'user',
 					},
 				],
-				default: 'user',
+				default: 'account',
 			},
+			...accountDescription,
 			...userDescription,
 		],
 	};

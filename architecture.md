@@ -19,6 +19,8 @@ n8n-nodes-peek-pro/
 │       ├── peekPro.svg       # Light theme icon
 │       ├── peekPro.dark.svg  # Dark theme icon
 │       └── resources/        # Resource-specific operations
+│           ├── account/      # Account-related operations
+│           │   └── index.ts  # Account operation definitions
 │           ├── company/      # Company-related operations
 │           │   ├── index.ts  # Company operation definitions
 │           │   └── getAll.ts # Get companies implementation
@@ -46,7 +48,7 @@ The primary node implementation that:
 **Key Features:**
 - Base URL: `http://127.0.0.1:5002` (local development)
 - Authentication: API key via `x-api-key` header
-- Resource-based architecture with User and Company operations
+- Resource-based architecture with Account, User and Company operations
 - Declarative routing for automatic request handling
 - Usable as a tool in n8n workflows
 
@@ -61,6 +63,11 @@ Implements API key-based authentication:
 ### 3. Resource Operations
 
 The node is designed with a modular resource-based architecture:
+
+#### Account Operations (`resources/account/`)
+- **Get Current**: Retrieve current account information via `GET /v1/account/current`
+- No parameters required - returns authenticated user's account details
+- Simple endpoint for account verification and basic account data
 
 #### Company Operations (`resources/company/`)
 - **Get Many**: Retrieve multiple companies via `GET /companies`
@@ -122,8 +129,9 @@ The node uses n8n's modern declarative routing approach:
 ### Implemented Features
 - ✅ Basic node structure and metadata
 - ✅ API key authentication
-- ✅ Resource-based architecture (User and Company)
+- ✅ Resource-based architecture (Account, User and Company)
 - ✅ Declarative routing system
+- ✅ Account operations (Get Current)
 - ✅ User operations (Get Many, Get Single)
 - ✅ Company operations (Get Many with pagination)
 - ✅ TypeScript compilation and build system
@@ -146,6 +154,7 @@ The node is now functionally implemented:
 
 ### Endpoints
 - `GET /ping` - Connectivity test (used for credential validation)
+- `GET /v1/account/current` - Get current account information
 - `GET /companies` - List companies with pagination support
 - `GET /users` - List users
 - `GET /users/{id}` - Get specific user by ID
