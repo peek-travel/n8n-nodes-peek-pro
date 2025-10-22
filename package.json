@@ -33,7 +33,8 @@
       "dist/credentials/PeekProApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/PeekPro/PeekPro.node.js"
+      "dist/nodes/PeekPro/PeekPro.node.js",
+      "dist/nodes/PeekProTrigger/PeekProTrigger.node.js"
     ]
   },
   "devDependencies": {

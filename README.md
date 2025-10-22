@@ -1,8 +1,8 @@
 # n8n-nodes-peek-pro
 
-This is an n8n community node. It lets you use _app/service name_ in your n8n workflows.
+This is an n8n community node. It lets you use Peek Pro in your n8n workflows.
 
-_App/service name_ is _one or two sentences describing the service this node integrates with_.
+Peek Pro is a booking and experience management platform that helps businesses manage their tours, activities, and experiences.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
 
@@ -20,11 +20,36 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-_List the operations supported by your node._
+This package includes two nodes:
+
+### Peek Pro Node (Regular Actions)
+- **Account Operations**: Get current account information
+- **User Operations**: Get users, retrieve specific user details
+- **Company Operations**: List companies with pagination support
+
+### Peek Pro Trigger Node (Webhook Events)
+- **New Booking**: Triggers when a new booking is created
+- **Booking Updated**: Triggers when a booking is updated
+- **Booking Cancelled**: Triggers when a booking is cancelled
+- **All Booking Events**: Triggers on any booking-related event
+
+The trigger node automatically manages webhook subscriptions with the Peek Pro API and processes incoming events in real-time.
 
 ## Credentials
 
-_If users need to authenticate with the app/service, provide details here. You should include prerequisites (such as signing up with the service), available authentication methods, and how to set them up._
+To use this node, you need to configure the Peek Pro API credentials:
+
+1. **API Key**: Obtain your API key from your Peek Pro account settings
+2. **Authentication Method**: The node uses API key authentication via the `x-api-key` header
+3. **Base URL**: The node connects to `https://n8n.peeklabs.com` by default
+
+### Setting up credentials:
+1. In n8n, go to **Credentials** → **Create New**
+2. Search for "Peek Pro API" and select it
+3. Enter your API key in the **API Key** field
+4. Click **Save** to store the credentials
+
+The credentials will be automatically tested when saved to ensure they work correctly.
 
 ## Compatibility
 

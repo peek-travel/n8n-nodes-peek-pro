@@ -11,7 +11,7 @@ export class PeekPro implements INodeType {
 		icon: { light: 'file:peekPro.svg', dark: 'file:peekPro.dark.svg' },
 		group: ['transform'],
 		version: 1,
-		// subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
+		// subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}', //FIXME
 		subtitle: '={{$parameter["operation"]}}',
 		description: 'Build workflows with Peek Pro',
 		defaults: {

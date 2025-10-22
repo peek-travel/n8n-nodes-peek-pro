@@ -22,7 +22,7 @@ export const accountDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/v1/accounts/current',
+						url: '/accounts/current',
 					},
 				},
 			},

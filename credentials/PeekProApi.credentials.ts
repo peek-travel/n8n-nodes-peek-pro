@@ -11,6 +11,8 @@ export class PeekProApi implements ICredentialType {
 
 	displayName = 'Peek Pro API';
 
+	icon = 'file:peekPro.svg' as const;
+
 	// Link to your community node's README
 	documentationUrl = 'https://github.com/org/-peek-pro?tab=readme-ov-file#credentials';
 
@@ -37,7 +39,7 @@ export class PeekProApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: PEEK_PRO_BASE_URL,
-			url: '/v1/ping',
+			url: '/ping',
 			method: 'GET',
 		},
 	};
