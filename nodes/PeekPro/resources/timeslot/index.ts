@@ -55,7 +55,7 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
     ],
-    default: 'getAll',
+    default: actionTimeslotGetRange,
   },
   ...timeslotGetRangeDescription,
   ...timeslotGetDescription,

@@ -5,7 +5,8 @@ import { userDescription } from './resources/user';
 import { accountDescription } from './resources/account';
 import { bookingDescription } from './resources/booking';
 import { timeslotDescription } from './resources/timeslot';
-import { resourceAccount, resourceBooking, resourceTimeslot, resourceUser } from './resources/resources.constants';
+import { resourceAccount, resourceBooking, resourceProduct, resourceTimeslot, resourceUser } from './resources/resources.constants';
+import { productDescription } from './resources/product';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -40,6 +41,10 @@ export class PeekPro implements INodeType {
 						value: resourceBooking,
 					},
 					{
+						name: 'Product',
+						value: resourceProduct,
+					},
+					{
 						name: 'Timeslot',
 						value: resourceTimeslot,
 					},
@@ -58,6 +63,7 @@ export class PeekPro implements INodeType {
 			...userDescription,
 			...bookingDescription,
 			...timeslotDescription,
+			...productDescription,
 		],
 	};
 }

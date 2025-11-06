@@ -1,4 +1,5 @@
 export const resourceBooking = 'booking';
+export const resourceProduct = 'product';
 export const resourceUser = 'user';
 export const resourceAccount = 'account';
 export const resourceTimeslot = 'timeslot';
@@ -18,3 +19,6 @@ export const actionAccountGetCurrent = 'get: current account';
 export const actionTimeslotGetRange = 'getMany: timeslots';
 export const actionTimeslotGetOne = 'get: timeslot';
 export const actionTimeslotSetAvailability = 'set: timeslot availability';
+
+export const actionProductGetAll = 'getAll: products';
+export const actionProductGetOne = 'get: product';

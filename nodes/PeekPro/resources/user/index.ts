@@ -1,5 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { userGetDescription } from './get';
+import { userGetDescription } from './getUser';
 import { actionUserGetAll, actionUserGetOne, resourceUser } from '../resources.constants';
 
 const showOnlyForUsers = {
@@ -20,7 +20,7 @@ export const userDescription: INodeProperties[] = [
 				name: 'Get All',
 				value: actionUserGetAll,
 				action: 'Get all users',
-				description: 'Get many users',
+				description: 'Get all users',
 				routing: {
 					request: {
 						method: 'GET',
@@ -41,7 +41,7 @@ export const userDescription: INodeProperties[] = [
 				},
 			},
 		],
-		default: 'getAll',
+		default: actionUserGetAll,
 	},
 	...userGetDescription,
 ];

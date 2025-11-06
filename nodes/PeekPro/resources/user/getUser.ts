@@ -13,6 +13,7 @@ export const userGetDescription: INodeProperties[] = [
 		type: 'string',
 		displayOptions: { show: showOnlyForUserGet },
 		default: '',
-		description: "The user's ID to retrieve",
+		description: "The ID of the user to retrieve",
+		required: true,
 	},
 ];
