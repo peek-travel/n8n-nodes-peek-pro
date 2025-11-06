@@ -1,9 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionBookingUpdateMetadata, resourceBookings } from '../resources.constants';
+import { actionBookingUpdateMetadata, resourceBooking } from '../resources.constants';
 
 const showOnlyForUpdateBookingMetatada = {
   operation: [actionBookingUpdateMetadata],
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingUpdateBookingMetatadaDescription: INodeProperties[] = [
@@ -13,7 +13,7 @@ export const bookingUpdateBookingMetatadaDescription: INodeProperties[] = [
     type: 'string',
     displayOptions: { show: showOnlyForUpdateBookingMetatada },
     default: '',
-    description: "The ID of the booking to retrieve",
+    description: "The ID of the booking to update",
     required: true,
   },
   {

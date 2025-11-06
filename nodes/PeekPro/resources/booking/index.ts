@@ -1,13 +1,21 @@
 import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
-import { actionBookingCreate, actionBookingGetMetadata, actionBookingGetOne, actionBookingGetRange, actionBookingUpdateCheckin, actionBookingUpdateMetadata, resourceBookings } from '../resources.constants';
-import { bookingUpdateCheckinDescription } from './updateCheckin';
+import {
+  actionBookingCreate,
+  actionBookingGetMetadata,
+  actionBookingGetOne,
+  actionBookingGetRange,
+  actionBookingUpdateCheckin,
+  actionBookingUpdateMetadata,
+  resourceBooking,
+} from '../resources.constants';
+import { bookingUpdateCheckinDescription } from './setCheckin';
 import { bookingGetBookingMetatadaDescription } from './getMetadata';
-import { bookingUpdateBookingMetatadaDescription } from './updateBookingMetadata';
+import { bookingUpdateBookingMetatadaDescription } from './setMetadata';
 
 const showOnlyForBookings = {
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingDescription: INodeProperties[] = [
@@ -21,10 +29,10 @@ export const bookingDescription: INodeProperties[] = [
     },
     options: [
       {
-        name: 'Get Bookings for Time Range',
+        name: 'Get All for Time Range',
         value: actionBookingGetRange,
-        action: 'Get Bookings for Time Range',
-        description: 'Get many bookings for a given time range',
+        action: 'Get bookings within time range',
+        description: 'Get all bookings for a given time range',
         routing: {
           request: {
             method: 'GET',
@@ -45,9 +53,9 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Update Booking Checkin Status',
+        name: 'Update Checkin Status',
         value: actionBookingUpdateCheckin,
-        action: 'Update booking checkin status',
+        action: 'Update the checkin status of a booking',
         description: 'Update the checkin status of a single booking',
         routing: {
           request: {
@@ -59,7 +67,7 @@ export const bookingDescription: INodeProperties[] = [
       {
         name: 'Get Metadata',
         value: actionBookingGetMetadata,
-        action: 'Get metadata for one booking',
+        action: 'Get the metadata of a booking',
         description: 'Get the metadata of a single booking',
         routing: {
           request: {
@@ -69,9 +77,9 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Update Metadata',
+        name: 'Set Metadata',
         value: actionBookingUpdateMetadata,
-        action: 'Update metadata for one booking',
+        action: 'Update metadata of a booking',
         description: 'Update the matadata of a single booking',
         routing: {
           request: {
@@ -81,10 +89,10 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Create Booking',
+        name: 'Create',
         value: actionBookingCreate,
-        action: 'Create booking',
-        description: 'Create a booking',
+        action: 'Create a new booking',
+        description: 'Create a new booking',
         routing: {
           request: {
             method: 'GET',
@@ -93,7 +101,7 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
     ],
-    default: 'getRange',
+    default: actionBookingGetRange,
   },
   ...bookingGetDescription,
   ...bookingGetRangeDescription,

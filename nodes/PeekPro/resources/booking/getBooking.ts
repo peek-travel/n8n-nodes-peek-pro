@@ -1,9 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionBookingGetOne, resourceBookings } from '../resources.constants';
+import { actionBookingGetOne, resourceBooking } from '../resources.constants';
 
 const showOnlyForBookingGet = {
   operation: [actionBookingGetOne],
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingGetDescription: INodeProperties[] = [

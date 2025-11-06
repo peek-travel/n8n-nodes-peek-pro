@@ -1,9 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionBookingGetMetadata, resourceBookings } from '../resources.constants';
+import { actionBookingGetMetadata, resourceBooking } from '../resources.constants';
 
 const showOnlyForGetBookingMetatada = {
   operation: [actionBookingGetMetadata],
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingGetBookingMetatadaDescription: INodeProperties[] = [

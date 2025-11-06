@@ -1,9 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionBookingUpdateCheckin, resourceBookings } from '../resources.constants';
+import { actionBookingUpdateCheckin, resourceBooking } from '../resources.constants';
 
 const showOnlyForBookingUpdateCheckin = {
   operation: [actionBookingUpdateCheckin],
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingUpdateCheckinDescription: INodeProperties[] = [
@@ -13,7 +13,7 @@ export const bookingUpdateCheckinDescription: INodeProperties[] = [
     type: 'string',
     displayOptions: { show: showOnlyForBookingUpdateCheckin },
     default: '',
-    description: "The ID of the booking to retrieve",
+    description: "The ID of the booking to update",
     required: true,
   },
   {

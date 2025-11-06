@@ -1,8 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { actionUserGetOne, resourceUser } from '../resources.constants';
 
 const showOnlyForUserGet = {
-	operation: ['get'],
-	resource: ['user'],
+	operation: [actionUserGetOne],
+	resource: [resourceUser],
 };
 
 export const userGetDescription: INodeProperties[] = [

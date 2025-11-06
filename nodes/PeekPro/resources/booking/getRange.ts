@@ -1,14 +1,14 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionBookingGetRange, resourceBookings } from '../resources.constants';
+import { actionBookingGetRange, resourceBooking } from '../resources.constants';
 
 const showOnlyForBookingGetRange = {
   operation: [actionBookingGetRange],
-  resource: [resourceBookings],
+  resource: [resourceBooking],
 };
 
 export const bookingGetRangeDescription: INodeProperties[] = [
   {
-    displayName: "Booking's Start Date",
+    displayName: "Range Starts At",
     name: 'startDate',
     type: 'dateTime',
     displayOptions: { show: showOnlyForBookingGetRange },
@@ -17,7 +17,7 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: "Booking's End Date",
+    displayName: "Range Ends At",
     name: 'endDate',
     type: 'dateTime',
     displayOptions: { show: showOnlyForBookingGetRange },

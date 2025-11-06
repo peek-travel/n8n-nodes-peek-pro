@@ -1,7 +1,8 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { actionAccountGetCurrent, resourceAccount } from '../resources.constants';
 
 const showOnlyForAccount = {
-	resource: ['account'],
+	resource: [resourceAccount],
 };
 
 export const accountDescription: INodeProperties[] = [
@@ -15,9 +16,9 @@ export const accountDescription: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Get Current Account',
-				value: 'getCurrent',
-				action: 'Get current account',
+				name: 'Get Current',
+				value: actionAccountGetCurrent,
+				action: 'Get the current account information',
 				description: 'Get the current account information',
 				routing: {
 					request: {
@@ -27,6 +28,6 @@ export const accountDescription: INodeProperties[] = [
 				},
 			},
 		],
-		default: 'getCurrent',
+		default: actionAccountGetCurrent,
 	},
 ];

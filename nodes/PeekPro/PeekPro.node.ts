@@ -4,6 +4,8 @@ import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.cons
 import { userDescription } from './resources/user';
 import { accountDescription } from './resources/account';
 import { bookingDescription } from './resources/booking';
+import { timeslotDescription } from './resources/timeslot';
+import { resourceAccount, resourceBooking, resourceTimeslot, resourceUser } from './resources/resources.constants';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -34,16 +36,20 @@ export class PeekPro implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Booking',
+						value: resourceBooking,
+					},
+					{
+						name: 'Timeslot',
+						value: resourceTimeslot,
+					},
+					{
 						name: 'Account',
-						value: 'account',
+						value: resourceAccount,
 					},
 					{
 						name: 'User',
-						value: 'user',
-					},
-					{
-						name: 'Booking',
-						value: 'booking',
+						value: resourceUser,
 					},
 				],
 				default: 'account',
@@ -51,6 +57,7 @@ export class PeekPro implements INodeType {
 			...accountDescription,
 			...userDescription,
 			...bookingDescription,
+			...timeslotDescription,
 		],
 	};
 }
