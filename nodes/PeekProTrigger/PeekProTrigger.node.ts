@@ -8,7 +8,7 @@ import type {
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError, NodeOperationError } from 'n8n-workflow';
-import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
+import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS, NGROK_FOR_LOCAL_WEBHOOK } from '../../constants/peekPro.constants';
 
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -46,24 +46,44 @@ export class PeekProTrigger implements INodeType {
 				type: 'multiOptions',
 				options: [
 					{
-						name: 'New Booking',
+						name: 'On booking created',
 						value: 'booking.created',
 						description: 'Trigger when a new booking is created',
 					},
 					{
-						name: 'Booking Updated',
-						value: 'booking.updated',
-						description: 'Trigger when a booking is updated',
-					},
-					{
-						name: 'Booking Cancelled',
+						name: 'On booking cancelled',
 						value: 'booking.cancelled',
 						description: 'Trigger when a booking is cancelled',
 					},
 					{
-						name: 'All Booking Events',
-						value: 'booking.*',
-						description: 'Trigger on all booking-related events',
+						name: 'On booking rescheduled',
+						value: 'booking.rescheduled',
+						description: 'Trigger when a booking is rescheduled',
+					},
+					{
+						name: 'On booking checked in',
+						value: 'booking.checked_in',
+						description: 'Trigger when a booking is checked in',
+					},
+					{
+						name: 'On any booking change',
+						value: 'booking.updated',
+						description: 'Trigger when a booking is created or updated',
+					},
+					{
+						name: 'On waiver signed (coming soon)',
+						value: 'waiver.created',
+						description: 'Trigger when a waiver is signed',
+					},
+					{
+						name: 'On data push from Focus App (coming soon)',
+						value: 'focus.data',
+						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
+					},
+					{
+						name: 'On data push from Peek Pro backend (coming soon)',
+						value: 'backend.data',
+						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
 					},
 				],
 				default: ['booking.created'],
@@ -78,18 +98,12 @@ export class PeekProTrigger implements INodeType {
 				default: {},
 				options: [
 					{
-						displayName: 'Include Raw Data',
-						name: 'includeRawData',
+						displayName: 'Trigger on changes made by n8n?',
+						name: 'triggerN8nBookings',
 						type: 'boolean',
 						default: false,
-						description: 'Whether to include the raw webhook payload in the output',
-					},
-					{
-						displayName: 'Verify SSL',
-						name: 'verifySSL',
-						type: 'boolean',
-						default: true,
-						description: 'Whether to verify SSL certificates for webhook requests',
+						description: "Whether to trigger on changes made by n8n workflows (not recommended)",
+						required: true,
 					},
 				],
 			},
@@ -128,7 +142,7 @@ export class PeekProTrigger implements INodeType {
 
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
-				const webhookUrl = this.getNodeWebhookUrl('default') as string;
+				let webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const events = this.getNodeParameter('events') as string[];
 				const options = this.getNodeParameter('options') as IDataObject;
 
@@ -140,6 +154,14 @@ export class PeekProTrigger implements INodeType {
 				// 		'The webhook cannot work with localhost URLs. Please use a public URL that Peek Pro can reach.',
 				// 	);
 				// }
+
+				// Replace 127.0.0:1:<port> with NGROK_FOR_LOCAL_WEBHOOK
+				webhookUrl = webhookUrl.replace(
+					'http://localhost:5678',
+					NGROK_FOR_LOCAL_WEBHOOK,
+				);
+
+				console.log('webhookUrl', webhookUrl);
 
 				// Prepare webhook subscription payload
 				const body: IDataObject = {

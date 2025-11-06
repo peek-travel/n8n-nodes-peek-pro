@@ -3,6 +3,7 @@ import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.cons
 // import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { userDescription } from './resources/user';
 import { accountDescription } from './resources/account';
+import { bookingDescription } from './resources/booking';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -40,11 +41,16 @@ export class PeekPro implements INodeType {
 						name: 'User',
 						value: 'user',
 					},
+					{
+						name: 'Booking',
+						value: 'booking',
+					},
 				],
 				default: 'account',
 			},
 			...accountDescription,
 			...userDescription,
+			...bookingDescription,
 		],
 	};
 }
