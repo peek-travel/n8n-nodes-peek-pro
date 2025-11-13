@@ -20,11 +20,11 @@ export const productDescription: INodeProperties[] = [
         name: 'Get All',
         value: actionProductGetAll,
         action: 'Get all products',
-        description: 'Get all',
+        description: 'Get all products',
         routing: {
           request: {
             method: 'GET',
-            url: '/users',
+            url: '/products',
           },
         },
       },
@@ -36,7 +36,7 @@ export const productDescription: INodeProperties[] = [
         routing: {
           request: {
             method: 'GET',
-            url: '=/users/{{$parameter.userId}}',
+            url: '=/products/{{$parameter.productId}}',
           },
         },
       },

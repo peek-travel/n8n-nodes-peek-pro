@@ -1,8 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionTimeslotGetOne, actionTimeslotGetRange, actionTimeslotSetAvailability, resourceTimeslot } from '../resources.constants';
+import { actionTimeslotGetOne, actionTimeslotGetRange, actionTimeslotSetAvailability, actionTimeslotSetNotes, resourceTimeslot } from '../resources.constants';
 import { timeslotGetRangeDescription } from './getRange';
 import { timeslotGetDescription } from './getTimeslot';
 import { timeslotSetAvailabilityStatus } from './setAvailability';
+import { timeslotSetNotes } from './setNotes';
 
 const showOnlyForTimeslots = {
   resource: [resourceTimeslot],
@@ -54,10 +55,23 @@ export const timeslotDescription: INodeProperties[] = [
           },
         },
       },
+      {
+        name: 'Set Notes',
+        value: actionTimeslotSetNotes,
+        action: 'Update the notes of a timeslot',
+        description: 'Update the notes of a timeslot',
+        routing: {
+          request: {
+            method: 'GET',
+            url: '=/users/{{$parameter.userId}}',
+          },
+        },
+      },
     ],
     default: actionTimeslotGetRange,
   },
   ...timeslotGetRangeDescription,
   ...timeslotGetDescription,
   ...timeslotSetAvailabilityStatus,
+  ...timeslotSetNotes,
 ];

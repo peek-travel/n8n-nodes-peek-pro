@@ -19,6 +19,7 @@ export const actionAccountGetCurrent = 'get: current account';
 export const actionTimeslotGetRange = 'getMany: timeslots';
 export const actionTimeslotGetOne = 'get: timeslot';
 export const actionTimeslotSetAvailability = 'set: timeslot availability';
+export const actionTimeslotSetNotes = 'set: timeslot notes';
 
 export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';
