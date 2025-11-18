@@ -1,28 +1,19 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionTimeslotGetRange, resourceTimeslot } from '../resources.constants';
+import { actionTimeslotGetDate, resourceTimeslot } from '../resources.constants';
 
 const showOnlyForTimeslotGetRange = {
-  operation: [actionTimeslotGetRange],
+  operation: [actionTimeslotGetDate],
   resource: [resourceTimeslot],
 };
 
-export const timeslotGetRangeDescription: INodeProperties[] = [
+export const timeslotGetDateDescription: INodeProperties[] = [
   {
-    displayName: "Range Starts At",
-    name: 'startDate',
+    displayName: "Date",
+    name: 'date',
     type: 'dateTime',
     displayOptions: { show: showOnlyForTimeslotGetRange },
     default: '',
-    description: "The date to start retrieving timeslots from",
-    required: true,
-  },
-  {
-    displayName: "Range Ends At",
-    name: 'endDate',
-    type: 'dateTime',
-    displayOptions: { show: showOnlyForTimeslotGetRange },
-    default: '',
-    description: "The date to end retrieving timeslots from",
+    description: "The date for which to retrieve timeslots",
     required: true,
   },
   {
@@ -32,5 +23,14 @@ export const timeslotGetRangeDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForTimeslotGetRange },
     default: '',
     description: "The ID of the product for which to find timeslots",
+    required: true,
+  },
+  {
+    displayName: 'Only Show Timeslots with Bookings',
+    name: 'hasBookings',
+    type: 'boolean',
+    displayOptions: { show: showOnlyForTimeslotGetRange },
+    default: true,
+    description: "Only return timeslots that have bookings",
   },
 ];

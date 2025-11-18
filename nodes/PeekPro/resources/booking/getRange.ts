@@ -8,8 +8,27 @@ const showOnlyForBookingGetRange = {
 
 export const bookingGetRangeDescription: INodeProperties[] = [
   {
-    displayName: "Range Starts At",
-    name: 'startDate',
+    displayName: "Purchase or Activity Date",
+    name: 'searchBy',
+    type: 'options',
+    displayOptions: { show: showOnlyForBookingGetRange },
+    default: '',
+    description: "Search by purchase or activity date",
+    required: true,
+    options: [
+      {
+        name: 'Purchase Date',
+        value: 'purchaseDate',
+      },
+      {
+        name: 'Activity Date',
+        value: 'activityDate',
+      },
+    ],
+  },
+  {
+    displayName: "From",
+    name: 'startTime',
     type: 'dateTime',
     displayOptions: { show: showOnlyForBookingGetRange },
     default: '',
@@ -17,8 +36,8 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: "Range Ends At",
-    name: 'endDate',
+    displayName: "To",
+    name: 'endTime',
     type: 'dateTime',
     displayOptions: { show: showOnlyForBookingGetRange },
     default: '',

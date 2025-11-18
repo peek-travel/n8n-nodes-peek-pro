@@ -3,16 +3,16 @@ import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
   actionBookingCreate,
-  actionBookingGetMetadata,
+  actionBookingGetGuests,
   actionBookingGetOne,
   actionBookingGetRange,
   actionBookingUpdateCheckin,
-  actionBookingUpdateMetadata,
+  actionBookingUpdateNotes,
   resourceBooking,
 } from '../resources.constants';
 import { bookingUpdateCheckinDescription } from './setCheckin';
-import { bookingGetBookingMetatadaDescription } from './getMetadata';
-import { bookingUpdateBookingMetatadaDescription } from './setMetadata';
+import { bookingGetBookingGuestsDescription } from './getGuests';
+import { bookingUpdateNotesDescription } from './appendNotes';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -37,6 +37,12 @@ export const bookingDescription: INodeProperties[] = [
           request: {
             method: 'GET',
             url: '/bookings',
+             qs: {
+              start: '={{$parameter["startTime"]}}',
+              end: '={{$parameter["endTime"]}}',
+              searchBy: '={{$parameter["searchBy"]}}',
+              productId: '={{$parameter["productId"]}}',
+            },
           },
         },
       },
@@ -53,34 +59,37 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: 'Get Guests',
+        value: actionBookingGetGuests,
+        action: 'Get the guests for a booking',
+        description: 'Get the guests for a single booking',
+        routing: {
+          request: {
+            method: 'GET',
+            url: '=/bookings/{{$parameter.bookingId}}/guests',
+          },
+        },
+      },
+      {
+        name: 'Add Note',
+        value: actionBookingUpdateNotes,
+        action: 'Append a note to the booking notes',
+        description: 'Append a note to the booking notes',
+        routing: {
+          request: {
+            method: 'POST',
+            url: '=/bookings/{{$parameter.bookingId}}/notes',
+            body: {
+              note: '={{$parameter["note"]}}',
+            },
+          },
+        },
+      },
+      {
         name: 'Update Checkin Status',
         value: actionBookingUpdateCheckin,
         action: 'Update the checkin status of a booking',
         description: 'Update the checkin status of a single booking',
-        routing: {
-          request: {
-            method: 'GET',
-            url: '=/bookings/{{$parameter.bookingId}}',
-          },
-        },
-      },
-      {
-        name: 'Get Metadata',
-        value: actionBookingGetMetadata,
-        action: 'Get the metadata of a booking',
-        description: 'Get the metadata of a single booking',
-        routing: {
-          request: {
-            method: 'GET',
-            url: '=/bookings/{{$parameter.bookingId}}',
-          },
-        },
-      },
-      {
-        name: 'Set Metadata',
-        value: actionBookingUpdateMetadata,
-        action: 'Update metadata of a booking',
-        description: 'Update the matadata of a single booking',
         routing: {
           request: {
             method: 'GET',
@@ -106,6 +115,6 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingGetDescription,
   ...bookingGetRangeDescription,
   ...bookingUpdateCheckinDescription,
-  ...bookingGetBookingMetatadaDescription,
-  ...bookingUpdateBookingMetatadaDescription,
+  ...bookingGetBookingGuestsDescription,
+  ...bookingUpdateNotesDescription,
 ];

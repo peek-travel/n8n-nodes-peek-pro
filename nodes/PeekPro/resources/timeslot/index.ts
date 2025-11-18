@@ -1,6 +1,12 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionTimeslotGetOne, actionTimeslotGetRange, actionTimeslotSetAvailability, actionTimeslotSetNotes, resourceTimeslot } from '../resources.constants';
-import { timeslotGetRangeDescription } from './getRange';
+import {
+  actionTimeslotGetOne,
+  actionTimeslotGetDate,
+  actionTimeslotSetAvailability,
+  actionTimeslotSetNotes,
+  resourceTimeslot,
+} from '../resources.constants';
+import { timeslotGetDateDescription } from './getRange';
 import { timeslotGetDescription } from './getTimeslot';
 import { timeslotSetAvailabilityStatus } from './setAvailability';
 import { timeslotSetNotes } from './setNotes';
@@ -20,14 +26,14 @@ export const timeslotDescription: INodeProperties[] = [
     },
     options: [
       {
-        name: 'Get All for Time Range',
-        value: actionTimeslotGetRange,
-        action: 'Get all timeslots within time range',
-        description: 'Get all timeslots within a given time range',
+        name: 'Get All for Date',
+        value: actionTimeslotGetDate,
+        action: 'Get all timeslots on a date',
+        description: 'Get all timeslots for a date and product',
         routing: {
           request: {
             method: 'GET',
-            url: '/users',
+            url: '/timeslots',
           },
         },
       },
@@ -68,9 +74,9 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
     ],
-    default: actionTimeslotGetRange,
+    default: actionTimeslotGetDate,
   },
-  ...timeslotGetRangeDescription,
+  ...timeslotGetDateDescription,
   ...timeslotGetDescription,
   ...timeslotSetAvailabilityStatus,
   ...timeslotSetNotes,
