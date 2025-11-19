@@ -34,6 +34,11 @@ export const timeslotDescription: INodeProperties[] = [
           request: {
             method: 'GET',
             url: '/timeslots',
+            qs: {
+              date: '={{$parameter["date"]}}',
+              productId: '={{$parameter["productId"]}}',
+              filterBookings: '={{$parameter["filterBookings"]}}',
+            },
           },
         },
       },
@@ -45,19 +50,19 @@ export const timeslotDescription: INodeProperties[] = [
         routing: {
           request: {
             method: 'GET',
-            url: '=/users/{{$parameter.userId}}',
+            url: '=/timeslots/{{$parameter.timeslotId}}',
           },
         },
       },
       {
-        name: 'Set Availability',
+        name: 'Set Availability Status',
         value: actionTimeslotSetAvailability,
         action: 'Set timeslot availability',
         description: 'Update the availability of a timeslot',
         routing: {
           request: {
-            method: 'GET',
-            url: '=/users/{{$parameter.userId}}',
+            method: 'POST',
+            url: '=/timeslots/{{$parameter.timeslotId}}',
           },
         },
       },

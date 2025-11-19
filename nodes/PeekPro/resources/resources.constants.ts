@@ -5,7 +5,8 @@ export const resourceAccount = 'account';
 export const resourceTimeslot = 'timeslot';
 
 export const actionBookingGetOne = 'get: booking';
-export const actionBookingGetRange = 'getMany: bookings';
+export const actionBookingGetRange = 'getMany: bookings (dates)';
+export const actionBookingGetTimeslot = 'getMany: bookings (timeslot)';
 export const actionBookingUpdateNotes = 'set: booking notes';
 export const actionBookingUpdateCheckin = 'set: booking checkin';
 export const actionBookingGetGuests = 'get: booking guests';

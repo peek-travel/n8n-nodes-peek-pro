@@ -26,11 +26,26 @@ export const timeslotGetDateDescription: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: 'Only Show Timeslots with Bookings',
-    name: 'hasBookings',
-    type: 'boolean',
+    displayName: 'Only Get',
+    name: 'filterBookings',
+    type: 'options',
     displayOptions: { show: showOnlyForTimeslotGetRange },
-    default: true,
-    description: "Only return timeslots that have bookings",
+    default: 'withBookings',
+    description: "Limit which timeslots to retrieve by whether they have bookings",
+    options: [
+      {
+        name: 'All Timeslots',
+        value: 'all',
+      },
+      {
+        name: 'Timeslots with Bookings',
+        value: 'withBookings',
+      },
+      {
+        name: 'Timeslots without Bookings',
+        value: 'withoutBookings',
+      },
+    ],
+
   },
 ];

@@ -6,6 +6,7 @@ import {
   actionBookingGetGuests,
   actionBookingGetOne,
   actionBookingGetRange,
+  actionBookingGetTimeslot,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
   resourceBooking,
@@ -13,6 +14,7 @@ import {
 import { bookingUpdateCheckinDescription } from './setCheckin';
 import { bookingGetBookingGuestsDescription } from './getGuests';
 import { bookingUpdateNotesDescription } from './appendNotes';
+import { bookingGetTimeslotDescription } from './getForTimeslot';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -42,6 +44,21 @@ export const bookingDescription: INodeProperties[] = [
               end: '={{$parameter["endTime"]}}',
               searchBy: '={{$parameter["searchBy"]}}',
               productId: '={{$parameter["productId"]}}',
+            },
+          },
+        },
+      },
+      {
+        name: 'Get All for Timeslot',
+        value: actionBookingGetTimeslot,
+        action: 'Get bookings for a timeslot',
+        description: 'Get all bookings for a given timeslot',
+        routing: {
+          request: {
+            method: 'GET',
+            url: '/bookings',
+            qs: {
+              timeslotId: '={{$parameter["timeslotId"]}}',
             },
           },
         },
@@ -92,8 +109,11 @@ export const bookingDescription: INodeProperties[] = [
         description: 'Update the checkin status of a single booking',
         routing: {
           request: {
-            method: 'GET',
-            url: '=/bookings/{{$parameter.bookingId}}',
+            method: 'POST',
+            url: '=/bookings/{{$parameter.bookingId}}/checkin',
+            body: {
+              checkedIn: '={{$parameter["checkedIn"]}}',
+            },
           },
         },
       },
@@ -114,6 +134,7 @@ export const bookingDescription: INodeProperties[] = [
   },
   ...bookingGetDescription,
   ...bookingGetRangeDescription,
+  ...bookingGetTimeslotDescription,
   ...bookingUpdateCheckinDescription,
   ...bookingGetBookingGuestsDescription,
   ...bookingUpdateNotesDescription,

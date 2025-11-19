@@ -90,23 +90,6 @@ export class PeekProTrigger implements INodeType {
 				required: true,
 				description: 'The events that should trigger the workflow',
 			},
-			{
-				displayName: 'Options',
-				name: 'options',
-				type: 'collection',
-				placeholder: 'Add Option',
-				default: {},
-				options: [
-					{
-						displayName: 'Trigger on changes made by n8n?',
-						name: 'triggerN8nBookings',
-						type: 'boolean',
-						default: false,
-						description: "Whether to trigger on changes made by n8n workflows (not recommended)",
-						required: true,
-					},
-				],
-			},
 		],
 	};
 

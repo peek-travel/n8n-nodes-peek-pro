@@ -12,7 +12,7 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     name: 'searchBy',
     type: 'options',
     displayOptions: { show: showOnlyForBookingGetRange },
-    default: '',
+    default: 'purchaseDate',
     description: "Search by purchase or activity date",
     required: true,
     options: [
