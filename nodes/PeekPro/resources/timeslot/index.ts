@@ -63,6 +63,9 @@ export const timeslotDescription: INodeProperties[] = [
           request: {
             method: 'POST',
             url: '=/timeslots/{{$parameter.timeslotId}}',
+            body: {
+              status: '={{$parameter["status"]}}',
+            },
           },
         },
       },
@@ -73,8 +76,11 @@ export const timeslotDescription: INodeProperties[] = [
         description: 'Update the notes of a timeslot',
         routing: {
           request: {
-            method: 'GET',
-            url: '=/users/{{$parameter.userId}}',
+            method: 'POST',
+            url: '=/timeslots/{{$parameter.timeslotId}}',
+            body: {
+              note: '={{$parameter["note"]}}',
+            },
           },
         },
       },

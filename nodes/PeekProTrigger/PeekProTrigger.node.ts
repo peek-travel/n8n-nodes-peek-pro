@@ -8,7 +8,7 @@ import type {
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError, NodeOperationError } from 'n8n-workflow';
-import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS, NGROK_FOR_LOCAL_WEBHOOK } from '../../constants/peekPro.constants';
+import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -17,8 +17,8 @@ export class PeekProTrigger implements INodeType {
 		icon: { light: 'file:peekPro.svg', dark: 'file:peekPro.dark.svg' },
 		group: ['trigger'],
 		version: 1,
-		subtitle: '={{$parameter["events"].length ? $parameter["events"].join(", ") : "No events selected"}}',
-		description: 'Starts the workflow when Peek Pro events occur (e.g., new bookings)',
+		subtitle: '={{$parameter["event"] || "No event selected"}}',
+		description: 'Starts the workflow when Peek Pro event occur (e.g., new bookings)',
 		defaults: {
 			name: 'Peek Pro Trigger',
 		},
@@ -41,9 +41,9 @@ export class PeekProTrigger implements INodeType {
 		],
 		properties: [
 			{
-				displayName: 'Events',
-				name: 'events',
-				type: 'multiOptions',
+				displayName: 'Event',
+				name: 'event',
+				type: 'options',
 				options: [
 					{
 						name: 'On booking created',
@@ -76,19 +76,19 @@ export class PeekProTrigger implements INodeType {
 						description: 'Trigger when a waiver is signed',
 					},
 					{
-						name: 'On data push from Focus App (coming soon)',
+						name: 'On data push from Focus App',
 						value: 'focus.data',
 						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
 					},
 					{
-						name: 'On data push from Peek Pro backend (coming soon)',
+						name: 'On data push from Peek Pro backend',
 						value: 'backend.data',
 						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
 					},
 				],
 				default: ['booking.created'],
 				required: true,
-				description: 'The events that should trigger the workflow',
+				description: 'The event that should trigger the workflow',
 			},
 		],
 	};
@@ -126,8 +126,7 @@ export class PeekProTrigger implements INodeType {
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
 				let webhookUrl = this.getNodeWebhookUrl('default') as string;
-				const events = this.getNodeParameter('events') as string[];
-				const options = this.getNodeParameter('options') as IDataObject;
+				const event = this.getNodeParameter('event') as string[];
 
 				// FIXME: add back in
 				// // Validate webhook URL
@@ -139,25 +138,20 @@ export class PeekProTrigger implements INodeType {
 				// }
 
 				// Replace 127.0.0:1:<port> with NGROK_FOR_LOCAL_WEBHOOK
-				webhookUrl = webhookUrl.replace(
-					'http://localhost:5678',
-					NGROK_FOR_LOCAL_WEBHOOK,
-				);
+				// webhookUrl = webhookUrl.replace(
+				// 	'http://localhost:5678',
+				// 	'http://127.0.0.1:5002',
+				// );
 
 				console.log('webhookUrl', webhookUrl);
 
 				// Prepare webhook subscription payload
 				const body: IDataObject = {
 					url: webhookUrl,
-					eventTypes: events,
+					eventTypes: [event],
 					active: true,
-					description: `n8n workflow webhook for events: ${events.join(', ')}`,
+					description: `n8n workflow webhook for event: ${event}`,
 				};
-
-				// Add SSL verification option if specified
-				if (options.verifySSL === false) {
-					body.verify_ssl = false;
-				}
 
 				let responseData;
 				try {
@@ -237,7 +231,6 @@ export class PeekProTrigger implements INodeType {
 		const headerData = this.getHeaderData();
 		const queryData = this.getQueryData();
 		const httpMethod = req.method?.toUpperCase() || 'POST';
-		const options = this.getNodeParameter('options') as IDataObject;
 
 		// Handle GET requests (webhook verification)
 		if (httpMethod === 'GET') {
@@ -258,7 +251,7 @@ export class PeekProTrigger implements INodeType {
 			};
 		}
 
-		// Handle POST requests (actual webhook events)
+		// Handle POST requests (actual webhook event)
 		if (httpMethod === 'POST') {
 			// Validate that we have data
 			if (!bodyData || (typeof bodyData === 'object' && Object.keys(bodyData).length === 0)) {
@@ -273,16 +266,6 @@ export class PeekProTrigger implements INodeType {
 				query: queryData,
 				timestamp: new Date().toISOString(),
 			};
-
-			// Include raw data if requested
-			if (options.includeRawData) {
-				eventData.raw = {
-					body: bodyData,
-					headers: headerData,
-					query: queryData,
-					method: httpMethod,
-				};
-			}
 
 			returnData.push(eventData);
 

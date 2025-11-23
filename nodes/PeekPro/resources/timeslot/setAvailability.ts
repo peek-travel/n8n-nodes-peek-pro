@@ -17,26 +17,26 @@ export const timeslotSetAvailabilityStatus: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: 'New Check-in Status',
-    name: 'checkedIn',
+    displayName: 'New Availability Status',
+    name: 'status',
     type: 'options',
     options: [
       {
         name: 'Available',
-        value: 'available',
+        value: 'BOOKABLE',
       },
       {
         name: 'Booked out',
-        value: 'bookedout',
+        value: 'BLOCKED',
       },
       {
         name: 'Call to Book',
-        value: 'calltobook',
+        value: 'CALL_TO_BOOK',
       },
     ],
     displayOptions: { show: showOnlyForSetTimeslotAvailability },
-    default: 'available',
-    description: "The checked-in status of the booking",
+    default: 'BOOKABLE',
+    description: "The availability status of the timeslot",
     required: true,
   },
 ];

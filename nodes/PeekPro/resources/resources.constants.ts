@@ -3,6 +3,7 @@ export const resourceProduct = 'product';
 export const resourceUser = 'user';
 export const resourceAccount = 'account';
 export const resourceTimeslot = 'timeslot';
+export const resourceDailyNote = 'dailyNote';
 
 export const actionBookingGetOne = 'get: booking';
 export const actionBookingGetRange = 'getMany: bookings (dates)';
@@ -14,6 +15,9 @@ export const actionBookingCreate = 'create: booking';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
+
+export const actionDailyNoteGetToday = 'get: daily note';
+export const actionDailyNoteSetToday = 'set: daily note';
 
 export const actionAccountGetCurrent = 'get: current account';
 
