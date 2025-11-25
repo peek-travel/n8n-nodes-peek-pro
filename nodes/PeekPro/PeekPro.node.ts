@@ -1,6 +1,5 @@
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
-// import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { userDescription } from './resources/user';
 import { accountDescription } from './resources/account';
 import { bookingDescription } from './resources/booking';
