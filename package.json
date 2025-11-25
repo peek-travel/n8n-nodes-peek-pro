@@ -9,7 +9,8 @@
     "n8n-community-node-package"
   ],
   "author": {
-    "name": "Peek Travel Inc."
+    "name": "Peek Travel Inc.",
+    "email": "oskar@peek.com"
   },
   "repository": {
     "type": "git",
