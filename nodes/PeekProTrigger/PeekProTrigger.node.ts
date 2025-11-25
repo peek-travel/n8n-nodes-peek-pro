@@ -128,22 +128,13 @@ export class PeekProTrigger implements INodeType {
 				let webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const event = this.getNodeParameter('event') as string[];
 
-				// FIXME: add back in
-				// // Validate webhook URL
-				// if (webhookUrl.includes('//localhost') || webhookUrl.includes('//127.0.0.1')) {
-				// 	throw new NodeOperationError(
-				// 		this.getNode(),
-				// 		'The webhook cannot work with localhost URLs. Please use a public URL that Peek Pro can reach.',
-				// 	);
-				// }
-
-				// Replace 127.0.0:1:<port> with NGROK_FOR_LOCAL_WEBHOOK
-				// webhookUrl = webhookUrl.replace(
-				// 	'http://localhost:5678',
-				// 	'http://127.0.0.1:5002',
-				// );
-
-				console.log('webhookUrl', webhookUrl);
+				// Validate webhook URL
+				if (webhookUrl.includes('//localhost') || webhookUrl.includes('//127.0.0.1')) {
+					throw new NodeOperationError(
+						this.getNode(),
+						'The webhook cannot work with localhost URLs. Please use a public URL that Peek Pro can reach.',
+					);
+				}
 
 				// Prepare webhook subscription payload
 				const body: IDataObject = {
