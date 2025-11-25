@@ -22,7 +22,7 @@ export const bookingUpdateCheckinDescription: INodeProperties[] = [
     type: "boolean",
     displayOptions: { show: showOnlyForBookingUpdateCheckin },
     default: true,
-    description: "The checked-in status of the booking",
+    description: "Whether the booking should be checked in",
     required: true,
   },
 ];

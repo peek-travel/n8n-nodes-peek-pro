@@ -6,7 +6,6 @@ import { bookingDescription } from './resources/booking';
 import { timeslotDescription } from './resources/timeslot';
 import {
 	resourceAccount,
-	resourceBooking,
 	resourceDailyNote,
 	resourceProduct,
 	resourceTimeslot,
@@ -44,7 +43,7 @@ export class PeekPro implements INodeType {
 				options: [
 					{
 						name: 'Booking',
-						value: resourceBooking,
+						value: 'booking',
 					},
 					{
 						name: 'Product',
@@ -67,7 +66,7 @@ export class PeekPro implements INodeType {
 						value: resourceDailyNote,
 					},
 				],
-				default: 'account',
+				default: 'booking',
 			},
 			...accountDescription,
 			...userDescription,

@@ -1,5 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionProductGetAll, actionProductGetOne, resourceProduct } from '../resources.constants';
+import { actionProductGetOne, resourceProduct } from '../resources.constants';
 import { productGetDescription } from './getProduct';
 
 const showOnlyForProducts = {
@@ -18,7 +18,7 @@ export const productDescription: INodeProperties[] = [
     options: [
       {
         name: "Get All",
-        value: actionProductGetAll,
+        value: 'getAll: products',
         action: "Get all products",
         description: "Get all products",
         routing: {
@@ -41,7 +41,7 @@ export const productDescription: INodeProperties[] = [
         },
       },
     ],
-    default: actionProductGetAll,
+    default: 'getAll: products',
   },
   ...productGetDescription,
 ];

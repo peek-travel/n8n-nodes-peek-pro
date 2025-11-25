@@ -1,7 +1,6 @@
 import type { INodeProperties } from 'n8n-workflow';
 import {
   actionTimeslotGetOne,
-  actionTimeslotGetDate,
   actionTimeslotSetAvailability,
   actionTimeslotSetNotes,
   resourceTimeslot,
@@ -27,7 +26,7 @@ export const timeslotDescription: INodeProperties[] = [
     options: [
       {
         name: "Get All for Date",
-        value: actionTimeslotGetDate,
+        value: 'getMany: timeslots',
         action: "Get all timeslots on a date",
         description: "Get all timeslots for a date and product",
         routing: {
@@ -85,7 +84,7 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
     ],
-    default: actionTimeslotGetDate,
+    default: 'getMany: timeslots',
   },
   ...timeslotGetDateDescription,
   ...timeslotGetDescription,

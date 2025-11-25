@@ -1,5 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { actionDailyNoteGetToday,  actionDailyNoteSetToday,  resourceDailyNote } from '../resources.constants';
+import { actionDailyNoteSetToday,  resourceDailyNote } from '../resources.constants';
 import { dailyNoteSetNotes } from './setNote';
 
 const showOnlyForDailyNote = {
@@ -18,9 +18,8 @@ export const dailyNoteDescription: INodeProperties[] = [
     options: [
       {
         name: "Get Today's Daily Note",
-        value: actionDailyNoteGetToday,
-        action: "Get today's daily note",
-        description: "Get today's daily note",
+        value: 'get: daily note',
+        action: 'Get daily note for today',
         routing: {
           request: {
             method: "GET",
@@ -31,8 +30,7 @@ export const dailyNoteDescription: INodeProperties[] = [
       {
         name: "Update Today's Daily Note",
         value: actionDailyNoteSetToday,
-        action: "Update today's daily note",
-        description: "Update today's daily note",
+        action: 'Update daily note for today',
         routing: {
           request: {
             method: "POST",
@@ -45,7 +43,7 @@ export const dailyNoteDescription: INodeProperties[] = [
       },
 
     ],
-    default: actionDailyNoteGetToday,
+    default: 'get: daily note',
   },
   ...dailyNoteSetNotes,
 ];

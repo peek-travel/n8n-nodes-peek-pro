@@ -22,7 +22,7 @@ export const bookingUpdateNotesDescription: INodeProperties[] = [
     type: "string",
     displayOptions: { show: showOnlyForBookingUpdateNotes },
     default: "",
-    description: "The additional note to add to the booking.",
+    description: 'The additional note to add to the booking',
     required: true,
   },
   {
@@ -31,7 +31,7 @@ export const bookingUpdateNotesDescription: INodeProperties[] = [
     type: "options",
     displayOptions: { show: showOnlyForBookingUpdateNotes },
     default: "append",
-    description: "Whether to add the note to the existing notes or overwrite them.",
+    description: 'Whether to add the note to the existing notes or overwrite them',
     required: true,
     options: [
       {

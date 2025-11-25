@@ -26,7 +26,7 @@ export const timeslotSetAvailabilityStatus: INodeProperties[] = [
         value: "BOOKABLE",
       },
       {
-        name: "Booked out",
+        name: 'Booked Out',
         value: "BLOCKED",
       },
       {

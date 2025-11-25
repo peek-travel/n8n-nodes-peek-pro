@@ -4,7 +4,6 @@ import { bookingGetRangeDescription } from './getRange';
 import {
   actionBookingGetGuests,
   actionBookingGetOne,
-  actionBookingGetRange,
   actionBookingGetTimeslot,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
@@ -31,7 +30,7 @@ export const bookingDescription: INodeProperties[] = [
     options: [
       {
         name: "Get All for Time Range",
-        value: actionBookingGetRange,
+        value: 'getMany: bookings (dates)',
         action: "Get bookings within time range",
         description: "Get all bookings for a given time range",
         routing: {
@@ -119,7 +118,7 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
     ],
-    default: actionBookingGetRange,
+    default: 'getMany: bookings (dates)',
   },
   ...bookingGetDescription,
   ...bookingGetRangeDescription,

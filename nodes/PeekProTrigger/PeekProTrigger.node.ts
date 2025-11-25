@@ -46,47 +46,47 @@ export class PeekProTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'On booking created',
-						value: 'booking.created',
-						description: 'Trigger when a new booking is created',
-					},
-					{
-						name: 'On booking cancelled',
-						value: 'booking.cancelled',
-						description: 'Trigger when a booking is cancelled',
-					},
-					{
-						name: 'On booking rescheduled',
-						value: 'booking.rescheduled',
-						description: 'Trigger when a booking is rescheduled',
-					},
-					{
-						name: 'On booking checked in',
-						value: 'booking.checked_in',
-						description: 'Trigger when a booking is checked in',
-					},
-					{
-						name: 'On any booking change',
+						name: 'On Any Booking Change',
 						value: 'booking.updated',
 						description: 'Trigger when a booking is created or updated',
 					},
 					{
-						name: 'On waiver signed',
-						value: 'waiver.signed',
-						description: 'Trigger when a waiver is signed by a guest',
+						name: 'On Booking Cancelled',
+						value: 'booking.cancelled',
+						description: 'Trigger when a booking is cancelled',
 					},
 					{
-						name: 'On data push from Focus App',
+						name: 'On Booking Checked In',
+						value: 'booking.checked_in',
+						description: 'Trigger when a booking is checked in',
+					},
+					{
+						name: 'On Booking Created',
+						value: 'booking.created',
+						description: 'Trigger when a new booking is created',
+					},
+					{
+						name: 'On Booking Rescheduled',
+						value: 'booking.rescheduled',
+						description: 'Trigger when a booking is rescheduled',
+					},
+					{
+						name: 'On Data Push From Focus App',
 						value: 'focus.data',
 						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
 					},
 					{
-						name: 'On data push from Peek Pro backend',
+						name: 'On Data Push From Peek Pro Backend',
 						value: 'backend.data',
 						description: 'Trigger when Peek Pro Focus app pushes data to n8n app',
 					},
+					{
+						name: 'On Waiver Signed',
+						value: 'waiver.signed',
+						description: 'Trigger when a waiver is signed by a guest',
+					},
 				],
-				default: ['booking.created'],
+				default: 'booking.created',
 				required: true,
 				description: 'The event that should trigger the workflow',
 			},
@@ -125,7 +125,7 @@ export class PeekProTrigger implements INodeType {
 
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
-				let webhookUrl = this.getNodeWebhookUrl('default') as string;
+				const webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const event = this.getNodeParameter('event') as string[];
 
 				// Validate webhook URL
