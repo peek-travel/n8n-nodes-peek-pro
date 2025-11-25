@@ -8,11 +8,11 @@ const showOnlyForGetBookingGuests = {
 
 export const bookingGetBookingGuestsDescription: INodeProperties[] = [
   {
-    displayName: 'Booking ID',
-    name: 'bookingId',
-    type: 'string',
+    displayName: "Booking ID",
+    name: "bookingId",
+    type: "string",
     displayOptions: { show: showOnlyForGetBookingGuests },
-    default: '',
+    default: "",
     description: "The ID of the booking to retrieve",
     required: true,
   },

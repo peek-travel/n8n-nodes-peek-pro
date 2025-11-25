@@ -8,20 +8,20 @@ const showOnlyForSetTimeslotNotes = {
 
 export const timeslotSetNotes: INodeProperties[] = [
   {
-    displayName: 'Timeslot ID',
-    name: 'timeslotId',
-    type: 'string',
+    displayName: "Timeslot ID",
+    name: "timeslotId",
+    type: "string",
     displayOptions: { show: showOnlyForSetTimeslotNotes },
-    default: '',
+    default: "",
     description: "The ID of the timeslot to update",
     required: true,
   },
   {
-    displayName: 'New Note',
-    name: 'note',
-    type: 'string',
+    displayName: "New Note",
+    name: "note",
+    type: "string",
     displayOptions: { show: showOnlyForSetTimeslotNotes },
-    default: '',
+    default: "",
     description: "The new notes of the timeslot",
     required: true,
   },

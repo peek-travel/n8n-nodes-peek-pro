@@ -8,35 +8,35 @@ const showOnlyForDailyNote = {
 
 export const dailyNoteDescription: INodeProperties[] = [
   {
-    displayName: 'Operation',
-    name: 'operation',
-    type: 'options',
+    displayName: "Operation",
+    name: "operation",
+    type: "options",
     noDataExpression: true,
     displayOptions: {
       show: showOnlyForDailyNote,
     },
     options: [
       {
-        name: 'Get Today\'s Daily Note',
+        name: "Get Today's Daily Note",
         value: actionDailyNoteGetToday,
-        action: 'Get today\'s Daily Note',
-        description: 'Get today\'s Daily Note',
+        action: "Get today's daily note",
+        description: "Get today's daily note",
         routing: {
           request: {
-            method: 'GET',
-            url: '/dailyNote/today',
+            method: "GET",
+            url: "/dailyNote/today",
           },
         },
       },
       {
-        name: 'Update Today\'s Daily Note',
+        name: "Update Today's Daily Note",
         value: actionDailyNoteSetToday,
-        action: 'Update today\'s Daily Note',
-        description: 'Update today\'s Daily Note',
+        action: "Update today's daily note",
+        description: "Update today's daily note",
         routing: {
           request: {
-            method: 'POST',
-            url: '/dailyNote/today',
+            method: "POST",
+            url: "/dailyNote/today",
             body: {
               note: '={{$parameter["note"]}}',
             },

@@ -21,23 +21,23 @@ const showOnlyForBookings = {
 
 export const bookingDescription: INodeProperties[] = [
   {
-    displayName: 'Operation',
-    name: 'operation',
-    type: 'options',
+    displayName: "Operation",
+    name: "operation",
+    type: "options",
     noDataExpression: true,
     displayOptions: {
       show: showOnlyForBookings,
     },
     options: [
       {
-        name: 'Get All for Time Range',
+        name: "Get All for Time Range",
         value: actionBookingGetRange,
-        action: 'Get bookings within time range',
-        description: 'Get all bookings for a given time range',
+        action: "Get bookings within time range",
+        description: "Get all bookings for a given time range",
         routing: {
           request: {
-            method: 'GET',
-            url: '/bookings',
+            method: "GET",
+            url: "/bookings",
             qs: {
               start: '={{$parameter["startTime"]}}',
               end: '={{$parameter["endTime"]}}',
@@ -49,14 +49,14 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Get All for Timeslot',
+        name: "Get All for Timeslot",
         value: actionBookingGetTimeslot,
-        action: 'Get bookings for a timeslot',
-        description: 'Get all bookings for a given timeslot',
+        action: "Get bookings for a timeslot",
+        description: "Get all bookings for a given timeslot",
         routing: {
           request: {
-            method: 'GET',
-            url: '/bookings',
+            method: "GET",
+            url: "/bookings",
             qs: {
               timeslotId: '={{$parameter["timeslotId"]}}',
             },
@@ -64,37 +64,37 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Get One',
+        name: "Get One",
         value: actionBookingGetOne,
-        action: 'Get one booking',
-        description: 'Get the data of a single booking',
+        action: "Get one booking",
+        description: "Get the data of a single booking",
         routing: {
           request: {
-            method: 'GET',
+            method: "GET",
             url: '=/bookings/{{$parameter.bookingId}}',
           },
         },
       },
       {
-        name: 'Get Guests',
+        name: "Get Guests",
         value: actionBookingGetGuests,
-        action: 'Get the guests for a booking',
-        description: 'Get the guests for a single booking',
+        action: "Get the guests for a booking",
+        description: "Get the guests for a single booking",
         routing: {
           request: {
-            method: 'GET',
+            method: "GET",
             url: '=/bookings/{{$parameter.bookingId}}/guests',
           },
         },
       },
       {
-        name: 'Add Note',
+        name: "Add Note",
         value: actionBookingUpdateNotes,
-        action: 'Append a note to the booking notes',
-        description: 'Append a note to the booking notes',
+        action: "Append a note to the booking notes",
+        description: "Append a note to the booking notes",
         routing: {
           request: {
-            method: 'POST',
+            method: "POST",
             url: '=/bookings/{{$parameter.bookingId}}/notes',
             body: {
               note: '={{$parameter["note"]}}',
@@ -104,13 +104,13 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Update Checkin Status',
+        name: "Update Checkin Status",
         value: actionBookingUpdateCheckin,
-        action: 'Update the checkin status of a booking',
-        description: 'Update the checkin status of a single booking',
+        action: "Update the checkin status of a booking",
+        description: "Update the checkin status of a single booking",
         routing: {
           request: {
-            method: 'POST',
+            method: "POST",
             url: '=/bookings/{{$parameter.bookingId}}/checkin',
             body: {
               checkedIn: '={{$parameter["checkedIn"]}}',

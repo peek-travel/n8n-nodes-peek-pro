@@ -8,34 +8,34 @@ const showOnlyForProducts = {
 
 export const productDescription: INodeProperties[] = [
   {
-    displayName: 'Operation',
-    name: 'operation',
-    type: 'options',
+    displayName: "Operation",
+    name: "operation",
+    type: "options",
     noDataExpression: true,
     displayOptions: {
       show: showOnlyForProducts,
     },
     options: [
       {
-        name: 'Get All',
+        name: "Get All",
         value: actionProductGetAll,
-        action: 'Get all products',
-        description: 'Get all products',
+        action: "Get all products",
+        description: "Get all products",
         routing: {
           request: {
-            method: 'GET',
-            url: '/products',
+            method: "GET",
+            url: "/products",
           },
         },
       },
       {
-        name: 'Get One',
+        name: "Get One",
         value: actionProductGetOne,
-        action: 'Get the data of a product',
-        description: 'Get the data of a single product',
+        action: "Get the data of a product",
+        description: "Get the data of a single product",
         routing: {
           request: {
-            method: 'GET',
+            method: "GET",
             url: '=/products/{{$parameter.productId}}',
           },
         },

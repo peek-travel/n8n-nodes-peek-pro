@@ -8,11 +8,11 @@ const showOnlyForSetDailyNote = {
 
 export const dailyNoteSetNotes: INodeProperties[] = [
   {
-    displayName: 'New Note for Today',
-    name: 'note',
-    type: 'string',
+    displayName: "New Note for Today",
+    name: "note",
+    type: "string",
     displayOptions: { show: showOnlyForSetDailyNote },
-    default: '',
+    default: "",
     description: "Today's new daily note on the dashboard",
     required: true,
   },

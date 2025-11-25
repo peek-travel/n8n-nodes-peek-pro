@@ -8,11 +8,11 @@ const showOnlyForBookingGetTimeslot = {
 
 export const bookingGetTimeslotDescription: INodeProperties[] = [
   {
-    displayName: 'Timeslot ID',
-    name: 'timeslotId',
-    type: 'string',
+    displayName: "Timeslot ID",
+    name: "timeslotId",
+    type: "string",
     displayOptions: { show: showOnlyForBookingGetTimeslot },
-    default: '',
+    default: "",
     description: "The ID of the timeslot for which to find bookings",
   },
 ];

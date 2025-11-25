@@ -8,11 +8,11 @@ const showOnlyForProductGetOne = {
 
 export const productGetDescription: INodeProperties[] = [
   {
-    displayName: 'Product ID',
-    name: 'productId',
-    type: 'string',
+    displayName: "Product ID",
+    name: "productId",
+    type: "string",
     displayOptions: { show: showOnlyForProductGetOne },
-    default: '',
+    default: "",
     description: "The ID of the product to retrieve",
     required: true,
   },

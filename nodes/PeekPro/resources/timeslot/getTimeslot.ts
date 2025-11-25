@@ -8,11 +8,11 @@ const showOnlyForTimeslotGet = {
 
 export const timeslotGetDescription: INodeProperties[] = [
   {
-    displayName: 'Timeslot ID',
-    name: 'timeslotId',
-    type: 'string',
+    displayName: "Timeslot ID",
+    name: "timeslotId",
+    type: "string",
     displayOptions: { show: showOnlyForTimeslotGet },
-    default: '',
+    default: "",
     description: "The ID of the timeslot to retrieve",
     required: true,
   },

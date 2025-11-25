@@ -8,34 +8,34 @@ const showOnlyForUsers = {
 
 export const userDescription: INodeProperties[] = [
 	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
+		displayName: "Operation",
+		name: "operation",
+		type: "options",
 		noDataExpression: true,
 		displayOptions: {
 			show: showOnlyForUsers,
 		},
 		options: [
 			{
-				name: 'Get All',
+				name: "Get All",
 				value: actionUserGetAll,
-				action: 'Get all users',
-				description: 'Get all users',
+				action: "Get all users",
+				description: "Get all users",
 				routing: {
 					request: {
-						method: 'GET',
-						url: '/users',
+						method: "GET",
+						url: "/users",
 					},
 				},
 			},
 			{
-				name: 'Get One',
+				name: "Get One",
 				value: actionUserGetOne,
-				action: 'Get the data of a user',
-				description: 'Get the data of a single user',
+				action: "Get the data of a user",
+				description: "Get the data of a single user",
 				routing: {
 					request: {
-						method: 'GET',
+						method: "GET",
 						url: '=/users/{{$parameter.userId}}',
 					},
 				},

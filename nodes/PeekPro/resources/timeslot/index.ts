@@ -17,23 +17,23 @@ const showOnlyForTimeslots = {
 
 export const timeslotDescription: INodeProperties[] = [
   {
-    displayName: 'Operation',
-    name: 'operation',
-    type: 'options',
+    displayName: "Operation",
+    name: "operation",
+    type: "options",
     noDataExpression: true,
     displayOptions: {
       show: showOnlyForTimeslots,
     },
     options: [
       {
-        name: 'Get All for Date',
+        name: "Get All for Date",
         value: actionTimeslotGetDate,
-        action: 'Get all timeslots on a date',
-        description: 'Get all timeslots for a date and product',
+        action: "Get all timeslots on a date",
+        description: "Get all timeslots for a date and product",
         routing: {
           request: {
-            method: 'GET',
-            url: '/timeslots',
+            method: "GET",
+            url: "/timeslots",
             qs: {
               date: '={{$parameter["date"]}}',
               productId: '={{$parameter["productId"]}}',
@@ -43,25 +43,25 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Get One',
+        name: "Get One",
         value: actionTimeslotGetOne,
-        action: 'Get a timeslot',
-        description: 'Get the data of a single timeslot',
+        action: "Get a timeslot",
+        description: "Get the data of a single timeslot",
         routing: {
           request: {
-            method: 'GET',
+            method: "GET",
             url: '=/timeslots/{{$parameter.timeslotId}}',
           },
         },
       },
       {
-        name: 'Set Availability Status',
+        name: "Set Availability Status",
         value: actionTimeslotSetAvailability,
-        action: 'Set timeslot availability',
-        description: 'Update the availability of a timeslot',
+        action: "Set timeslot availability",
+        description: "Update the availability of a timeslot",
         routing: {
           request: {
-            method: 'POST',
+            method: "POST",
             url: '=/timeslots/{{$parameter.timeslotId}}',
             body: {
               status: '={{$parameter["status"]}}',
@@ -70,13 +70,13 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
       {
-        name: 'Set Notes',
+        name: "Set Notes",
         value: actionTimeslotSetNotes,
-        action: 'Update the notes of a timeslot',
-        description: 'Update the notes of a timeslot',
+        action: "Update the notes of a timeslot",
+        description: "Update the notes of a timeslot",
         routing: {
           request: {
-            method: 'POST',
+            method: "POST",
             url: '=/timeslots/{{$parameter.timeslotId}}',
             body: {
               note: '={{$parameter["note"]}}',

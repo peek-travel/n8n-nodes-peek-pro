@@ -8,18 +8,18 @@ const showOnlyForBookingUpdateCheckin = {
 
 export const bookingUpdateCheckinDescription: INodeProperties[] = [
   {
-    displayName: 'Booking ID',
-    name: 'bookingId',
-    type: 'string',
+    displayName: "Booking ID",
+    name: "bookingId",
+    type: "string",
     displayOptions: { show: showOnlyForBookingUpdateCheckin },
-    default: '',
+    default: "",
     description: "The ID of the booking to update",
     required: true,
   },
   {
-    displayName: 'New Check-in Status',
-    name: 'checkedIn',
-    type: 'boolean',
+    displayName: "New Check-in Status",
+    name: "checkedIn",
+    type: "boolean",
     displayOptions: { show: showOnlyForBookingUpdateCheckin },
     default: true,
     description: "The checked-in status of the booking",

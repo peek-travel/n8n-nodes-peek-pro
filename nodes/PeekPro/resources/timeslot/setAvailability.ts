@@ -8,34 +8,34 @@ const showOnlyForSetTimeslotAvailability = {
 
 export const timeslotSetAvailabilityStatus: INodeProperties[] = [
   {
-    displayName: 'Timeslot ID',
-    name: 'timeslotId',
-    type: 'string',
+    displayName: "Timeslot ID",
+    name: "timeslotId",
+    type: "string",
     displayOptions: { show: showOnlyForSetTimeslotAvailability },
-    default: '',
+    default: "",
     description: "The ID of the timeslot to update",
     required: true,
   },
   {
-    displayName: 'New Availability Status',
-    name: 'status',
-    type: 'options',
+    displayName: "New Availability Status",
+    name: "status",
+    type: "options",
     options: [
       {
-        name: 'Available',
-        value: 'BOOKABLE',
+        name: "Available",
+        value: "BOOKABLE",
       },
       {
-        name: 'Booked out',
-        value: 'BLOCKED',
+        name: "Booked out",
+        value: "BLOCKED",
       },
       {
-        name: 'Call to Book',
-        value: 'CALL_TO_BOOK',
+        name: "Call to Book",
+        value: "CALL_TO_BOOK",
       },
     ],
     displayOptions: { show: showOnlyForSetTimeslotAvailability },
-    default: 'BOOKABLE',
+    default: "BOOKABLE",
     description: "The availability status of the timeslot",
     required: true,
   },

@@ -8,11 +8,11 @@ const showOnlyForUserGet = {
 
 export const userGetDescription: INodeProperties[] = [
 	{
-		displayName: 'User ID',
-		name: 'userId',
-		type: 'string',
+		displayName: "User ID",
+		name: "userId",
+		type: "string",
 		displayOptions: { show: showOnlyForUserGet },
-		default: '',
+		default: "",
 		description: "The ID of the user to retrieve",
 		required: true,
 	},
