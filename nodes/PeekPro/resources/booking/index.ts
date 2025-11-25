@@ -2,7 +2,6 @@ import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
-  actionBookingCreate,
   actionBookingGetGuests,
   actionBookingGetOne,
   actionBookingGetRange,
@@ -99,6 +98,7 @@ export const bookingDescription: INodeProperties[] = [
             url: '=/bookings/{{$parameter.bookingId}}/notes',
             body: {
               note: '={{$parameter["note"]}}',
+              appendOrOverwrite: '={{$parameter["appendOrOverwrite"]}}',
             },
           },
         },
@@ -115,18 +115,6 @@ export const bookingDescription: INodeProperties[] = [
             body: {
               checkedIn: '={{$parameter["checkedIn"]}}',
             },
-          },
-        },
-      },
-      {
-        name: 'Create',
-        value: actionBookingCreate,
-        action: 'Create a new booking',
-        description: 'Create a new booking',
-        routing: {
-          request: {
-            method: 'GET',
-            url: '=/bookings/{{$parameter.bookingId}}',
           },
         },
       },

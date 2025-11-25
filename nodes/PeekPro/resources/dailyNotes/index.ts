@@ -19,7 +19,7 @@ export const dailyNoteDescription: INodeProperties[] = [
       {
         name: 'Get Today\'s Daily Note',
         value: actionDailyNoteGetToday,
-        action: 'Get today\'s daily note',
+        action: 'Get today\'s Daily Note',
         description: 'Get today\'s Daily Note',
         routing: {
           request: {
@@ -31,7 +31,7 @@ export const dailyNoteDescription: INodeProperties[] = [
       {
         name: 'Update Today\'s Daily Note',
         value: actionDailyNoteSetToday,
-        action: 'Update today\'s daily note',
+        action: 'Update today\'s Daily Note',
         description: 'Update today\'s Daily Note',
         routing: {
           request: {
