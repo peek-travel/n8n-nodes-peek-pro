@@ -52,4 +52,12 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     default: '',
     description: "The ID of the product for which to find bookings",
   },
+  {
+    displayName: 'Primary Guest Email',
+    name: 'email',
+    type: 'string',
+    displayOptions: { show: showOnlyForBookingGetRange },
+    default: '',
+    description: "The email of the primary guest for which to find bookings",
+  },
 ];

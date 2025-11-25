@@ -71,9 +71,9 @@ export class PeekProTrigger implements INodeType {
 						description: 'Trigger when a booking is created or updated',
 					},
 					{
-						name: 'On waiver signed (coming soon)',
-						value: 'waiver.created',
-						description: 'Trigger when a waiver is signed',
+						name: 'On waiver signed',
+						value: 'waiver.signed',
+						description: 'Trigger when a waiver is signed by a guest',
 					},
 					{
 						name: 'On data push from Focus App',

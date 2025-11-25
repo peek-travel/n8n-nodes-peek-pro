@@ -17,12 +17,31 @@ export const bookingUpdateNotesDescription: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: 'Additional Note',
+    displayName: 'Note',
     name: 'note',
     type: 'string',
     displayOptions: { show: showOnlyForBookingUpdateNotes },
-    default: true,
-    description: "The checked-in status of the booking",
+    default: "",
+    description: "The additional note to add to the booking.",
     required: true,
+  },
+  {
+    displayName: "Add or Overwrite",
+    name: 'appendOrOverwrite',
+    type: 'options',
+    displayOptions: { show: showOnlyForBookingUpdateNotes },
+    default: 'append',
+    description: 'Whether to add the note to the existing notes or overwrite them.',
+    required: true,
+    options: [
+      {
+        name: 'Add (Recommended)',
+        value: 'append',
+      },
+      {
+        name: 'Overwrite (Strongly Not Recommended)',
+        value: 'overwrite',
+      },
+    ],
   },
 ];

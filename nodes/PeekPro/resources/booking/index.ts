@@ -39,11 +39,12 @@ export const bookingDescription: INodeProperties[] = [
           request: {
             method: 'GET',
             url: '/bookings',
-             qs: {
+            qs: {
               start: '={{$parameter["startTime"]}}',
               end: '={{$parameter["endTime"]}}',
               searchBy: '={{$parameter["searchBy"]}}',
               productId: '={{$parameter["productId"]}}',
+              email: '={{$parameter["email"]}}',
             },
           },
         },
