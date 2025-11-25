@@ -1,71 +1,49 @@
 # n8n-nodes-peek-pro
 
-This is an n8n community node. It lets you use Peek Pro in your n8n workflows.
-
-Peek Pro is a booking and experience management platform that helps businesses manage their tours, activities, and experiences.
-
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
-
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
-[Resources](#resources)
-[Version history](#version-history)
+An n8n community node that allows interacting with the Peek Pro booking software.
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+In your n8n instance:
 
-## Operations
-
-This package includes two nodes:
-
-### Peek Pro Node (Regular Actions)
-- **Account Operations**: Get current account information
-- **User Operations**: Get users, retrieve specific user details
-- **Company Operations**: List companies with pagination support
-
-### Peek Pro Trigger Node (Webhook Events)
-- **New Booking**: Triggers when a new booking is created
-- **Booking Updated**: Triggers when a booking is updated
-- **Booking Cancelled**: Triggers when a booking is cancelled
-- **All Booking Events**: Triggers on any booking-related event
-
-The trigger node automatically manages webhook subscriptions with the Peek Pro API and processes incoming events in real-time.
+1. Go to Settings → Community Nodes.
+2. Add the following package: `n8n-nodes-peek-pro`
 
 ## Credentials
 
-To use this node, you need to configure the Peek Pro API credentials:
+This node requires an API key.
+Peek Pro customers can obtain their API key from the Peek Pro n8n app.
 
-1. **API Key**: Obtain your API key from your Peek Pro account settings
-2. **Authentication Method**: The node uses API key authentication via the `x-api-key` header
-3. **Base URL**: The node connects to `https://n8n.peeklabs.com` by default
+To configure it in n8n:
 
-### Setting up credentials:
-1. In n8n, go to **Credentials** → **Create New**
-2. Search for "Peek Pro API" and select it
-3. Enter your API key in the **API Key** field
-4. Click **Save** to store the credentials
+1. Go to Credentials → New
+2. Select Peek Pro API
+3. Enter your API key
+4. Save
 
-The credentials will be automatically tested when saved to ensure they work correctly.
+## Features
 
-## Compatibility
+This package supports:
 
-_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+- Webhook-style triggers for new or updated bookings
+- Notification triggers for signed waivers
+- Pulling booking information
+- Accessing back-office calendar data
+- Retrieving guest information
 
 ## Usage
 
-_This is an optional section. Use it to help users with any difficult or confusing aspects of the node._
+1. Add a Peek Pro node to your workflow
+2. Select an operation such as booking retrieval or event subscription
+3. Choose or create your Peek Pro API credentials
+4. Configure the required fields
+5. Execute the node to verify everything is working
 
-_By the time users are looking for community nodes, they probably already know n8n basics. But if you expect new users, you can link to the [Try it out](https://docs.n8n.io/try-it-out/) documentation to help them get started._
+## Requirements
 
-## Resources
+- Available for all current Peek Pro customers
+- API key is available via the Peek Pro n8n app
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* _Link to app/service documentation._
+## License
 
-## Version history
-
-_This is another optional section. If your node has multiple versions, include a short description of available versions and what changed, as well as any compatibility impact._
+MIT
