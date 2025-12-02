@@ -14,7 +14,7 @@ export class PeekProApi implements ICredentialType {
 	icon = 'file:peekPro.svg' as const;
 
 	// Link to your community node's README
-	documentationUrl = 'https://github.com/org/-peek-pro?tab=readme-ov-file#credentials';
+	documentationUrl = 'https://github.com/peek-travel/n8n-nodes-peek-pro';
 
 	properties: INodeProperties[] = [
 		{
