@@ -46,9 +46,9 @@ export class PeekProTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'On Any Booking Change',
-						value: 'booking.updated',
-						description: 'Trigger when a booking is created or updated',
+						name: 'On Booking Created',
+						value: 'booking.created',
+						description: 'Trigger when a new booking is created',
 					},
 					{
 						name: 'On Booking Cancelled',
@@ -61,9 +61,9 @@ export class PeekProTrigger implements INodeType {
 						description: 'Trigger when a booking is checked in',
 					},
 					{
-						name: 'On Booking Created',
-						value: 'booking.created',
-						description: 'Trigger when a new booking is created',
+						name: 'On Any Booking Change',
+						value: 'booking.updated',
+						description: 'Trigger when a booking is created or updated',
 					},
 					{
 						name: 'On Booking Rescheduled',
