@@ -1,4 +1,4 @@
-import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 import { userDescription } from './resources/user';
 import { accountDescription } from './resources/account';
@@ -27,8 +27,8 @@ export class PeekPro implements INodeType {
 			name: 'Peek Pro',
 		},
 		usableAsTool: true,
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [{ name: 'peekProApi', required: true }],
 		requestDefaults: {
 			baseURL: PEEK_PRO_BASE_URL,

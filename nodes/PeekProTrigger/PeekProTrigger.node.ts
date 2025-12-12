@@ -7,7 +7,7 @@ import type {
 	IWebhookResponseData,
 	JsonObject,
 } from 'n8n-workflow';
-import { NodeApiError, NodeOperationError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 
 export class PeekProTrigger implements INodeType {
@@ -24,7 +24,7 @@ export class PeekProTrigger implements INodeType {
 		},
 		usableAsTool: true,
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'peekProApi',
@@ -46,9 +46,9 @@ export class PeekProTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'On Any Booking Change',
-						value: 'booking.updated',
-						description: 'Trigger when a booking is created or updated',
+						name: 'On Booking Created',
+						value: 'booking.created',
+						description: 'Trigger when a new booking is created',
 					},
 					{
 						name: 'On Booking Cancelled',
@@ -61,9 +61,9 @@ export class PeekProTrigger implements INodeType {
 						description: 'Trigger when a booking is checked in',
 					},
 					{
-						name: 'On Booking Created',
-						value: 'booking.created',
-						description: 'Trigger when a new booking is created',
+						name: 'On Any Booking Change',
+						value: 'booking.updated',
+						description: 'Trigger when a booking is created or updated',
 					},
 					{
 						name: 'On Booking Rescheduled',

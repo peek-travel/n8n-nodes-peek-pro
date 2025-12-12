@@ -1,17 +1,17 @@
 {
-	"node": "n8n-nodes-peek-pro",
+	"node": "n8n-nodes-base.peekPro",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Development", "Developer Tools"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://github.com/org/repo?tab=readme-ov-file#credentials"
+				"url": "https://github.com/peek-travel/n8n-nodes-peek-pro"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://github.com/org/repo?tab=readme-ov-file"
+				"url": "https://github.com/peek-travel/n8n-nodes-peek-pro"
 			}
 		]
 	}
