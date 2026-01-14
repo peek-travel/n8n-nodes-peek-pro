@@ -43,6 +43,7 @@ export const bookingDescription: INodeProperties[] = [
               searchBy: '={{$parameter["searchBy"]}}',
               productId: '={{$parameter["productId"]}}',
               email: '={{$parameter["email"]}}',
+              searchString: '={{$parameter["searchString"]}}',
               includeGuests: '={{$parameter["includeGuests"]}}',
             },
           },
