@@ -24,6 +24,7 @@ export const actionTimeslotGetDate = 'getMany: timeslots';
 export const actionTimeslotGetOne = 'get: timeslot';
 export const actionTimeslotSetAvailability = 'set: timeslot availability';
 export const actionTimeslotSetNotes = 'set: timeslot notes';
+export const actionTimeslotSetGuide = 'set: timeslot guide';
 
 export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';

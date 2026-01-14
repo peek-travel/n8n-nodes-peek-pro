@@ -2,6 +2,7 @@ import type { INodeProperties } from 'n8n-workflow';
 import {
   actionTimeslotGetOne,
   actionTimeslotSetAvailability,
+  actionTimeslotSetGuide,
   actionTimeslotSetNotes,
   resourceTimeslot,
 } from '../resources.constants';
@@ -9,6 +10,7 @@ import { timeslotGetDateDescription } from './getRange';
 import { timeslotGetDescription } from './getTimeslot';
 import { timeslotSetAvailabilityStatus } from './setAvailability';
 import { timeslotSetNotes } from './setNotes';
+import { timeslotSetGuide } from './setResourceGuide';
 
 const showOnlyForTimeslots = {
   resource: [resourceTimeslot],
@@ -83,6 +85,22 @@ export const timeslotDescription: INodeProperties[] = [
           },
         },
       },
+      {
+        name: "Set Guide",
+        value: actionTimeslotSetGuide,
+        action: "Assign or unassign a guide to a timeslot",
+        description: "Assign or unassign a guide to a timeslot",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/timeslots/{{$parameter.timeslotId}}/guideAssign',
+            body: {
+              guideId: '={{$parameter["guideId"]}}',
+              assignOrUnassign: '={{$parameter["assignOrUnassign"]}}',
+            },
+          },
+        },
+      },
     ],
     default: 'getMany: timeslots',
   },
@@ -90,4 +108,5 @@ export const timeslotDescription: INodeProperties[] = [
   ...timeslotGetDescription,
   ...timeslotSetAvailabilityStatus,
   ...timeslotSetNotes,
+  ...timeslotSetGuide,
 ];
