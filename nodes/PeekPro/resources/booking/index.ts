@@ -2,6 +2,7 @@ import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
+  actionBookingCreateBooking,
   actionBookingGetGuests,
   actionBookingGetOne,
   actionBookingGetTimeslot,
@@ -13,6 +14,7 @@ import { bookingUpdateCheckinDescription } from './setCheckin';
 import { bookingGetBookingGuestsDescription } from './getGuests';
 import { bookingUpdateNotesDescription } from './appendNotes';
 import { bookingGetTimeslotDescription } from './getForTimeslot';
+import { bookingCreateDescription } from './createBooking';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -117,6 +119,36 @@ export const bookingDescription: INodeProperties[] = [
           },
         },
       },
+      {
+        name: "Create Booking",
+        value: actionBookingCreateBooking,
+        action: "Create a new booking",
+        description: "Create a new booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/create',
+            body: {
+              externalId: '={{$parameter["externalId"]}}',
+              product: '={{$parameter["product"]}}',
+              tickets: '={{$parameter["tickets"]}}',
+              date: '={{$parameter["date"]}}',
+              start: '={{$parameter["start"]}}',
+              end: '={{$parameter["end"]}}',
+              customerName: '={{$parameter["customerName"]}}',
+              email: '={{$parameter["email"]}}',
+              phone: '={{$parameter["phone"]}}',
+              notes: '={{$parameter["notes"]}}',
+              postalCode: '={{$parameter["postalCode"]}}',
+              country: '={{$parameter["country"]}}',
+              optinMarketing: '={{$parameter["optinMarketing"]}}',
+              optinSms: '={{$parameter["optinSms"]}}',
+              shouldSendEmails: '={{$parameter["shouldSendEmails"]}}',
+              markBookingAsPaid: '={{$parameter["markBookingAsPaid"]}}',
+            },
+          },
+        },
+      },
     ],
     default: 'getMany: bookings (dates)',
   },
@@ -126,4 +158,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingUpdateCheckinDescription,
   ...bookingGetBookingGuestsDescription,
   ...bookingUpdateNotesDescription,
+  ...bookingCreateDescription,
 ];

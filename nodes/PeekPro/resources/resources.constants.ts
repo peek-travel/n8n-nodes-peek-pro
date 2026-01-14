@@ -11,6 +11,7 @@ export const actionBookingGetTimeslot = 'getMany: bookings (timeslot)';
 export const actionBookingUpdateNotes = 'set: booking notes';
 export const actionBookingUpdateCheckin = 'set: booking checkin';
 export const actionBookingGetGuests = 'get: booking guests';
+export const actionBookingCreateBooking = 'create: booking';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
