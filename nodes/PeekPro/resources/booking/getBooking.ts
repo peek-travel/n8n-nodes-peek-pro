@@ -16,4 +16,11 @@ export const bookingGetDescription: INodeProperties[] = [
     description: "The ID of the booking to retrieve",
     required: true,
   },
+  {
+    displayName: 'Include Guest Details (from waivers)',
+		name: 'includeGuests',
+		type: "boolean",
+		default: false,
+		description: 'Whether to include guest details from waivers',
+  },
 ];

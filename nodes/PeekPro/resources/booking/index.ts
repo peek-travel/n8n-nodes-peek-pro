@@ -3,7 +3,6 @@ import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
   actionBookingCreateBooking,
-  actionBookingGetGuests,
   actionBookingGetOne,
   actionBookingGetTimeslot,
   actionBookingUpdateCheckin,
@@ -11,7 +10,6 @@ import {
   resourceBooking,
 } from '../resources.constants';
 import { bookingUpdateCheckinDescription } from './setCheckin';
-import { bookingGetBookingGuestsDescription } from './getGuests';
 import { bookingUpdateNotesDescription } from './appendNotes';
 import { bookingGetTimeslotDescription } from './getForTimeslot';
 import { bookingCreateDescription } from './createBooking';
@@ -45,6 +43,7 @@ export const bookingDescription: INodeProperties[] = [
               searchBy: '={{$parameter["searchBy"]}}',
               productId: '={{$parameter["productId"]}}',
               email: '={{$parameter["email"]}}',
+              includeGuests: '={{$parameter["includeGuests"]}}',
             },
           },
         },
@@ -60,6 +59,7 @@ export const bookingDescription: INodeProperties[] = [
             url: "/bookings",
             qs: {
               timeslotId: '={{$parameter["timeslotId"]}}',
+              includeGuests: '={{$parameter["includeGuests"]}}',
             },
           },
         },
@@ -73,18 +73,9 @@ export const bookingDescription: INodeProperties[] = [
           request: {
             method: "GET",
             url: '=/bookings/{{$parameter.bookingId}}',
-          },
-        },
-      },
-      {
-        name: "Get Guests",
-        value: actionBookingGetGuests,
-        action: "Get the guests for a booking",
-        description: "Get the guests for a single booking",
-        routing: {
-          request: {
-            method: "GET",
-            url: '=/bookings/{{$parameter.bookingId}}/guests',
+            qs: {
+              includeGuests: '={{$parameter["includeGuests"]}}',
+            },
           },
         },
       },
@@ -156,7 +147,6 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingGetRangeDescription,
   ...bookingGetTimeslotDescription,
   ...bookingUpdateCheckinDescription,
-  ...bookingGetBookingGuestsDescription,
   ...bookingUpdateNotesDescription,
   ...bookingCreateDescription,
 ];

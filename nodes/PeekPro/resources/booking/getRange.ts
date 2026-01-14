@@ -61,4 +61,11 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     default: "",
     description: "The email of the primary guest for which to find bookings",
   },
+  {
+    displayName: 'Include Guest Details (from waivers)',
+		name: 'includeGuests',
+		type: "boolean",
+		default: false,
+		description: 'Whether to include guest details from waivers',
+  },
 ];
