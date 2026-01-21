@@ -74,6 +74,7 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     displayName: 'Include Guest Details (from waivers)',
 		name: 'includeGuests',
 		type: "boolean",
+    displayOptions: { show: showOnlyForBookingGetRange },
 		default: false,
 		description: 'Whether to include guest details from waivers',
   },

@@ -19,6 +19,7 @@ export const bookingGetTimeslotDescription: INodeProperties[] = [
     displayName: 'Include Guest Details (from waivers)',
 		name: 'includeGuests',
 		type: "boolean",
+    displayOptions: { show: showOnlyForBookingGetTimeslot },
 		default: false,
 		description: 'Whether to include guest details from waivers',
   },
