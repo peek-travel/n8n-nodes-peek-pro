@@ -17,7 +17,7 @@ export const bookingGetDescription: INodeProperties[] = [
     required: true,
   },
   {
-    displayName: 'Include Guest Details (from waivers)',
+    displayName: 'Include Guest Details (From Waivers)',
 		name: 'includeGuests',
 		type: "boolean",
     displayOptions: { show: showOnlyForBookingGet },

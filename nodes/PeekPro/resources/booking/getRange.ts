@@ -71,7 +71,7 @@ export const bookingGetRangeDescription: INodeProperties[] = [
     description: "The search text for which to find bookings",
   },
   {
-    displayName: 'Include Guest Details (from waivers)',
+    displayName: 'Include Guest Details (From Waivers)',
 		name: 'includeGuests',
 		type: "boolean",
     displayOptions: { show: showOnlyForBookingGetRange },

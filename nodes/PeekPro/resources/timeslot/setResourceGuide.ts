@@ -45,7 +45,7 @@ export const timeslotSetGuide: INodeProperties[] = [
         value: "assign",
       },
       {
-        name: "Remove from Timeslots",
+        name: "Remove From Timeslots",
         value: "unassign",
       },
     ],

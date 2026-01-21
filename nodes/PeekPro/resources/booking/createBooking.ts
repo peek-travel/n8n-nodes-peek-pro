@@ -81,7 +81,6 @@ export const bookingCreateDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForBookingCreate },
     default: "",
     description: "The email of the customer",
-    required: false,
   },
   {
     displayName: "Customer Phone Number",
@@ -90,8 +89,7 @@ export const bookingCreateDescription: INodeProperties[] = [
     placeholder: '+15555555555',
     displayOptions: { show: showOnlyForBookingCreate },
     default: "",
-    description: "The email of the customer",
-    required: false,
+    description: "The phone number of the customer",
   },
   {
     displayName: "Notes",
@@ -100,7 +98,6 @@ export const bookingCreateDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForBookingCreate },
     default: "",
     description: "The notes for the booking",
-    required: false,
   },
   {
     displayName: "Customer Postal Code",
@@ -109,7 +106,6 @@ export const bookingCreateDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForBookingCreate },
     default: "",
     description: "The postal code of the customer",
-    required: false,
   },
   {
     displayName: "Customer Country",
@@ -119,7 +115,6 @@ export const bookingCreateDescription: INodeProperties[] = [
     default: "",
     placeholder: 'US',
     description: "The 2 letter country code of the customer (e.g. 'US' for the United States)",
-    required: false,
   },
   {
     displayName: 'Opted Into Marketing',

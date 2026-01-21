@@ -28,6 +28,6 @@ export const resellerDescription: INodeProperties[] = [
         },
       },
     ],
-    default: 'getAll: resellers',
+    default: 'getAll: reseller',
   }
 ];

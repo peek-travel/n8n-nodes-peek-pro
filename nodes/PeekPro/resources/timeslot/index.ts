@@ -95,8 +95,8 @@ export const timeslotDescription: INodeProperties[] = [
             method: "POST",
             url: '=/timeslots/guideAssign',
             body: {
-              timeslotIds: '={{$parameter["timeslotIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=\s*/, "")) }}',
-              guideIds: '={{$parameter["guideOrResourceIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=\s*/, "")) }}',
+              timeslotIds: '={{$parameter["timeslotIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=/, "")) }}',
+              guideIds: '={{$parameter["guideOrResourceIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=/, "")) }}',
               assignOrUnassign: '={{$parameter["assignOrUnassign"]}}',
             },
           },
