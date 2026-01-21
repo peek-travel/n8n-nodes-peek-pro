@@ -8,11 +8,13 @@ import {
 	resourceAccount,
 	resourceDailyNote,
 	resourceProduct,
+	resourceReseller,
 	resourceTimeslot,
 	resourceUser,
 } from './resources/resources.constants';
 import { productDescription } from './resources/product';
 import { dailyNoteDescription } from './resources/dailyNotes';
+import { resellerDescription } from './resources/reseller';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -62,6 +64,10 @@ export class PeekPro implements INodeType {
 						value: resourceUser,
 					},
 					{
+						name: 'Reseller',
+						value: resourceReseller,
+					},
+					{
 						name: 'Daily Note',
 						value: resourceDailyNote,
 					},
@@ -74,6 +80,7 @@ export class PeekPro implements INodeType {
 			...timeslotDescription,
 			...productDescription,
 			...dailyNoteDescription,
+			...resellerDescription,
 		],
 	};
 }

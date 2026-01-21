@@ -4,6 +4,7 @@ export const resourceUser = 'user';
 export const resourceAccount = 'account';
 export const resourceTimeslot = 'timeslot';
 export const resourceDailyNote = 'dailyNote';
+export const resourceReseller = 'reseller';
 
 export const actionBookingGetOne = 'get: booking';
 export const actionBookingGetRange = 'getMany: bookings (dates)';
@@ -11,6 +12,7 @@ export const actionBookingGetTimeslot = 'getMany: bookings (timeslot)';
 export const actionBookingUpdateNotes = 'set: booking notes';
 export const actionBookingUpdateCheckin = 'set: booking checkin';
 export const actionBookingCreateBooking = 'create: booking';
+export const actionBookingCancel = 'cancel: booking';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
@@ -28,3 +30,5 @@ export const actionTimeslotSetGuide = 'set: timeslot guide';
 
 export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';
+
+export const actionResellerGetAll = 'getAll: reseller';

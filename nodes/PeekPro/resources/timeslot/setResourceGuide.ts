@@ -9,20 +9,26 @@ const showOnlyForSetTimeslotGuide = {
 export const timeslotSetGuide: INodeProperties[] = [
   {
     displayName: "Timeslot ID",
-    name: "timeslotId",
+    name: "timeslotIds",
     type: "string",
+    typeOptions: {
+      multipleValues: true,
+    },
     displayOptions: { show: showOnlyForSetTimeslotGuide },
-    default: "",
-    description: "The ID of the timeslot to update",
+    default: [],
+    description: "The IDs of the timeslots to update",
     required: true,
   },
   {
-    displayName: "Guide ID",
-    name: "guideId",
+    displayName: "Guide or Resource ID",
+    name: "guideOrResourceIds",
     type: "string",
+    typeOptions: {
+      multipleValues: true,
+    },
+    default: [],
     displayOptions: { show: showOnlyForSetTimeslotGuide },
-    default: "",
-    description: "The ID of the guide to assign to the timeslot",
+    description: "The ID of the guide or resource to assign to the timeslot",
     required: true,
   },
   {
@@ -35,11 +41,11 @@ export const timeslotSetGuide: INodeProperties[] = [
     required: true,
     options: [
       {
-        name: "Assign",
+        name: "Assign to Timeslots",
         value: "assign",
       },
       {
-        name: "Unassign",
+        name: "Remove from Timeslots",
         value: "unassign",
       },
     ],

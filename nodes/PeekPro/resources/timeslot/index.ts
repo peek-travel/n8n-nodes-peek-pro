@@ -86,16 +86,17 @@ export const timeslotDescription: INodeProperties[] = [
         },
       },
       {
-        name: "Set Guide",
+        name: "Set Guide or Resource",
         value: actionTimeslotSetGuide,
-        action: "Assign or unassign a guide to a timeslot",
-        description: "Assign or unassign a guide to a timeslot",
+        action: "Set a guide to a timeslot",
+        description: "Set a guide to a timeslot",
         routing: {
           request: {
             method: "POST",
-            url: '=/timeslots/{{$parameter.timeslotId}}/guideAssign',
+            url: '=/timeslots/guideAssign',
             body: {
-              guideId: '={{$parameter["guideId"]}}',
+              timeslotIds: '={{$parameter["timeslotIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=\s*/, "")) }}',
+              guideIds: '={{$parameter["guideOrResourceIds"].map(e => $evaluateExpression(e)).map(s => s.replace(/^=\s*/, "")) }}',
               assignOrUnassign: '={{$parameter["assignOrUnassign"]}}',
             },
           },

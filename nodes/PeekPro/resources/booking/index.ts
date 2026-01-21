@@ -2,6 +2,7 @@ import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
+  actionBookingCancel,
   actionBookingCreateBooking,
   actionBookingGetOne,
   actionBookingGetTimeslot,
@@ -13,6 +14,7 @@ import { bookingUpdateCheckinDescription } from './setCheckin';
 import { bookingUpdateNotesDescription } from './appendNotes';
 import { bookingGetTimeslotDescription } from './getForTimeslot';
 import { bookingCreateDescription } from './createBooking';
+import { bookingCancelDescription } from './cancelBooking';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -112,6 +114,18 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Cancel Booking",
+        value: actionBookingCancel,
+        action: "Cancel a booking",
+        description: "Cancel a booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/cancel',
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -119,7 +133,7 @@ export const bookingDescription: INodeProperties[] = [
         routing: {
           request: {
             method: "POST",
-            url: '=/bookings/{{$parameter.bookingId}}/create',
+            url: '=/bookings/create',
             body: {
               externalId: '={{$parameter["externalId"]}}',
               product: '={{$parameter["product"]}}',
@@ -150,4 +164,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingUpdateCheckinDescription,
   ...bookingUpdateNotesDescription,
   ...bookingCreateDescription,
+  ...bookingCancelDescription,
 ];
