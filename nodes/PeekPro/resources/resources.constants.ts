@@ -5,6 +5,7 @@ export const resourceAccount = 'account';
 export const resourceTimeslot = 'timeslot';
 export const resourceDailyNote = 'dailyNote';
 export const resourceReseller = 'reseller';
+export const resourcePromoCode = 'promoCode';
 
 export const actionBookingGetOne = 'get: booking';
 export const actionBookingGetRange = 'getMany: bookings (dates)';
@@ -32,3 +33,6 @@ export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';
 
 export const actionResellerGetAll = 'getAll: reseller';
+
+export const actionPromoCodeGetAll = 'getAll: promoCode';
+export const actionPromoCodeCreate = 'create: promoCode';
