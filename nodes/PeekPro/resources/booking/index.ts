@@ -5,6 +5,7 @@ import {
   actionBookingCancel,
   actionBookingCreateBooking,
   actionBookingGetOne,
+  actionBookingGetPaymentsOnFile,
   actionBookingGetTimeslot,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
@@ -15,6 +16,7 @@ import { bookingUpdateNotesDescription } from './appendNotes';
 import { bookingGetTimeslotDescription } from './getForTimeslot';
 import { bookingCreateDescription } from './createBooking';
 import { bookingCancelDescription } from './cancelBooking';
+import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -126,6 +128,18 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Get Payments On File",
+        value: actionBookingGetPaymentsOnFile,
+        action: "Get payments on file for a booking",
+        description: "Get the payment sources and associated payments for a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/paymentsOnFile',
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -167,4 +181,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingUpdateNotesDescription,
   ...bookingCreateDescription,
   ...bookingCancelDescription,
+  ...bookingGetPaymentsOnFileDescription,
 ];
