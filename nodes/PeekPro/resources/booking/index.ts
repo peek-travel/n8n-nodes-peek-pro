@@ -152,6 +152,7 @@ export const bookingDescription: INodeProperties[] = [
               shouldSendEmails: '={{$parameter["shouldSendEmails"]}}',
               markBookingAsPaid: '={{$parameter["markBookingAsPaid"]}}',
               partialPaymentAmount: '={{$parameter["partialPaymentAmount"]}}',
+              parentOrderId: '={{$parameter["parentOrderId"]}}',
             },
           },
         },

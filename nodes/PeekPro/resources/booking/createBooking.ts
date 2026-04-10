@@ -149,6 +149,14 @@ export const bookingCreateDescription: INodeProperties[] = [
 		description: 'Whether to mark the booking as paid',
   },
   {
+    displayName: 'Add Booking to Existing Order',
+		name: 'parentOrderId',
+		type: "string",
+    displayOptions: { show: showOnlyForBookingCreate },
+		default: "",
+		description: 'The order ID to add this booking to. A valid order ID starts with "O-" or "o_".',
+  },
+  {
     displayName: 'Partial Payment Amount',
 		name: 'partialPaymentAmount',
 		type: "string",
