@@ -8,6 +8,7 @@ import {
   actionBookingGetPaymentsOnFile,
   actionBookingGetTimeslot,
   actionBookingMakePayment,
+  actionBookingRefundPayment,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
   resourceBooking,
@@ -19,6 +20,7 @@ import { bookingCreateDescription } from './createBooking';
 import { bookingCancelDescription } from './cancelBooking';
 import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
 import { bookingMakePaymentDescription } from './makePayment';
+import { bookingRefundPaymentDescription } from './refundPayment';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -162,6 +164,25 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Refund Payment",
+        value: actionBookingRefundPayment,
+        action: "Refund a payment on a booking",
+        description: "Refund a payment on a booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/refund',
+            body: {
+              paymentId: '={{$parameter["paymentId"]}}',
+              amount: '={{$parameter["amount"]}}',
+              currency: '={{$parameter["currency"]}}',
+              idempotencyKey: '={{$parameter["idempotencyKey"]}}',
+              liveMode: '={{$parameter["liveMode"]}}',
+            },
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -205,4 +226,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingCancelDescription,
   ...bookingGetPaymentsOnFileDescription,
   ...bookingMakePaymentDescription,
+  ...bookingRefundPaymentDescription,
 ];
