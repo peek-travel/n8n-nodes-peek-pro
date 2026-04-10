@@ -151,6 +151,7 @@ export const bookingDescription: INodeProperties[] = [
               optinSms: '={{$parameter["optinSms"]}}',
               shouldSendEmails: '={{$parameter["shouldSendEmails"]}}',
               markBookingAsPaid: '={{$parameter["markBookingAsPaid"]}}',
+              partialPaymentAmount: '={{$parameter["partialPaymentAmount"]}}',
             },
           },
         },
