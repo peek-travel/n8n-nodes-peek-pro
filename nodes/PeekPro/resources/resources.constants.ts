@@ -15,6 +15,7 @@ export const actionBookingUpdateCheckin = 'set: booking checkin';
 export const actionBookingCreateBooking = 'create: booking';
 export const actionBookingCancel = 'cancel: booking';
 export const actionBookingGetPaymentsOnFile = 'get: booking payments on file';
+export const actionBookingMakePayment = 'create: booking payment';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
