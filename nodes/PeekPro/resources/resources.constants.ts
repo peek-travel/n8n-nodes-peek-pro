@@ -14,6 +14,9 @@ export const actionBookingUpdateNotes = 'set: booking notes';
 export const actionBookingUpdateCheckin = 'set: booking checkin';
 export const actionBookingCreateBooking = 'create: booking';
 export const actionBookingCancel = 'cancel: booking';
+export const actionBookingGetPaymentsOnFile = 'get: booking payments on file';
+export const actionBookingMakePayment = 'create: booking payment';
+export const actionBookingRefundPayment = 'create: booking refund';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';

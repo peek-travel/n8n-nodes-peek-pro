@@ -5,7 +5,10 @@ import {
   actionBookingCancel,
   actionBookingCreateBooking,
   actionBookingGetOne,
+  actionBookingGetPaymentsOnFile,
   actionBookingGetTimeslot,
+  actionBookingMakePayment,
+  actionBookingRefundPayment,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
   resourceBooking,
@@ -15,6 +18,9 @@ import { bookingUpdateNotesDescription } from './appendNotes';
 import { bookingGetTimeslotDescription } from './getForTimeslot';
 import { bookingCreateDescription } from './createBooking';
 import { bookingCancelDescription } from './cancelBooking';
+import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
+import { bookingMakePaymentDescription } from './makePayment';
+import { bookingRefundPaymentDescription } from './refundPayment';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -126,6 +132,57 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Get Payments On File",
+        value: actionBookingGetPaymentsOnFile,
+        action: "Get payments on file for a booking",
+        description: "Get the payment sources and associated payments for a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/paymentsOnFile',
+          },
+        },
+      },
+      {
+        name: "Make Payment",
+        value: actionBookingMakePayment,
+        action: "Make a payment on a booking",
+        description: "Charge a saved payment source for a booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/makePayment',
+            body: {
+              paymentSourceId: '={{$parameter["paymentSourceId"]}}',
+              amount: '={{$parameter["amount"]}}',
+              currency: '={{$parameter["currency"]}}',
+              idempotencyKey: '={{$parameter["idempotencyKey"]}}',
+              liveMode: '={{$parameter["liveMode"]}}',
+              customerMessage: '={{$parameter["customerMessage"]}}',
+            },
+          },
+        },
+      },
+      {
+        name: "Refund Payment",
+        value: actionBookingRefundPayment,
+        action: "Refund a payment on a booking",
+        description: "Refund a payment on a booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/refund',
+            body: {
+              paymentId: '={{$parameter["paymentId"]}}',
+              amount: '={{$parameter["amount"]}}',
+              currency: '={{$parameter["currency"]}}',
+              idempotencyKey: '={{$parameter["idempotencyKey"]}}',
+              liveMode: '={{$parameter["liveMode"]}}',
+            },
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -151,6 +208,8 @@ export const bookingDescription: INodeProperties[] = [
               optinSms: '={{$parameter["optinSms"]}}',
               shouldSendEmails: '={{$parameter["shouldSendEmails"]}}',
               markBookingAsPaid: '={{$parameter["markBookingAsPaid"]}}',
+              partialPaymentAmount: '={{$parameter["partialPaymentAmount"]}}',
+              parentOrderId: '={{$parameter["parentOrderId"]}}',
             },
           },
         },
@@ -165,4 +224,7 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingUpdateNotesDescription,
   ...bookingCreateDescription,
   ...bookingCancelDescription,
+  ...bookingGetPaymentsOnFileDescription,
+  ...bookingMakePaymentDescription,
+  ...bookingRefundPaymentDescription,
 ];
