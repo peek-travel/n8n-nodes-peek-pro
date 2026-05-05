@@ -2,6 +2,7 @@ import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
+  actionBookingAddAddon,
   actionBookingCancel,
   actionBookingCreateBooking,
   actionBookingGetInvoiceLink,
@@ -23,6 +24,7 @@ import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
 import { bookingMakePaymentDescription } from './makePayment';
 import { bookingRefundPaymentDescription } from './refundPayment';
 import { bookingGetInvoiceLinkDescription } from './getInvoiceLink';
+import { bookingAddAddonDescription } from './addAddon';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -197,6 +199,22 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Add Add-On",
+        value: actionBookingAddAddon,
+        action: "Add an add-on to a booking",
+        description: "Attach an add-on to an existing booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/addons',
+            body: {
+              addonId: '={{$parameter["addonId"]}}',
+              quantity: '={{$parameter["quantity"]}}',
+            },
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -242,4 +260,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingMakePaymentDescription,
   ...bookingRefundPaymentDescription,
   ...bookingGetInvoiceLinkDescription,
+  ...bookingAddAddonDescription,
 ];
