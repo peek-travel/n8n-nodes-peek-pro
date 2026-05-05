@@ -4,6 +4,7 @@ import { bookingGetRangeDescription } from './getRange';
 import {
   actionBookingCancel,
   actionBookingCreateBooking,
+  actionBookingGetInvoiceLink,
   actionBookingGetOne,
   actionBookingGetPaymentsOnFile,
   actionBookingGetTimeslot,
@@ -21,6 +22,7 @@ import { bookingCancelDescription } from './cancelBooking';
 import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
 import { bookingMakePaymentDescription } from './makePayment';
 import { bookingRefundPaymentDescription } from './refundPayment';
+import { bookingGetInvoiceLinkDescription } from './getInvoiceLink';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -144,6 +146,18 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Get Invoice Link",
+        value: actionBookingGetInvoiceLink,
+        action: "Get the invoice link for a booking",
+        description: "Get the invoice link for a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/invoiceLink',
+          },
+        },
+      },
+      {
         name: "Make Payment",
         value: actionBookingMakePayment,
         action: "Make a payment on a booking",
@@ -227,4 +241,5 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingGetPaymentsOnFileDescription,
   ...bookingMakePaymentDescription,
   ...bookingRefundPaymentDescription,
+  ...bookingGetInvoiceLinkDescription,
 ];
