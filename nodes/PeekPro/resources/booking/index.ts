@@ -2,8 +2,10 @@ import type { INodeProperties } from 'n8n-workflow';
 import { bookingGetDescription } from './getBooking';
 import { bookingGetRangeDescription } from './getRange';
 import {
+  actionBookingAddAddon,
   actionBookingCancel,
   actionBookingCreateBooking,
+  actionBookingGetInvoiceLink,
   actionBookingGetOne,
   actionBookingGetPaymentsOnFile,
   actionBookingGetTimeslot,
@@ -21,6 +23,8 @@ import { bookingCancelDescription } from './cancelBooking';
 import { bookingGetPaymentsOnFileDescription } from './getPaymentsOnFile';
 import { bookingMakePaymentDescription } from './makePayment';
 import { bookingRefundPaymentDescription } from './refundPayment';
+import { bookingGetInvoiceLinkDescription } from './getInvoiceLink';
+import { bookingAddAddonDescription } from './addAddon';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -144,6 +148,18 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Get Invoice Link",
+        value: actionBookingGetInvoiceLink,
+        action: "Get the invoice link for a booking",
+        description: "Get the invoice link for a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/invoiceLink',
+          },
+        },
+      },
+      {
         name: "Make Payment",
         value: actionBookingMakePayment,
         action: "Make a payment on a booking",
@@ -178,6 +194,22 @@ export const bookingDescription: INodeProperties[] = [
               currency: '={{$parameter["currency"]}}',
               idempotencyKey: '={{$parameter["idempotencyKey"]}}',
               liveMode: '={{$parameter["liveMode"]}}',
+            },
+          },
+        },
+      },
+      {
+        name: "Add Add-On",
+        value: actionBookingAddAddon,
+        action: 'Add an addon to a booking',
+        description: "Attach an add-on to an existing booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/addons',
+            body: {
+              addonId: '={{$parameter["addonId"]}}',
+              quantity: '={{$parameter["quantity"]}}',
             },
           },
         },
@@ -227,4 +259,6 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingGetPaymentsOnFileDescription,
   ...bookingMakePaymentDescription,
   ...bookingRefundPaymentDescription,
+  ...bookingGetInvoiceLinkDescription,
+  ...bookingAddAddonDescription,
 ];

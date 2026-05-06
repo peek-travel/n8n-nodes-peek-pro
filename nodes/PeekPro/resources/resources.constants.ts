@@ -17,6 +17,8 @@ export const actionBookingCancel = 'cancel: booking';
 export const actionBookingGetPaymentsOnFile = 'get: booking payments on file';
 export const actionBookingMakePayment = 'create: booking payment';
 export const actionBookingRefundPayment = 'create: booking refund';
+export const actionBookingGetInvoiceLink = 'get: booking invoice link';
+export const actionBookingAddAddon = 'create: booking addon';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
