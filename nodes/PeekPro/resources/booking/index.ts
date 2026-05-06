@@ -201,7 +201,7 @@ export const bookingDescription: INodeProperties[] = [
       {
         name: "Add Add-On",
         value: actionBookingAddAddon,
-        action: "Add an add-on to a booking",
+        action: 'Add an addon to a booking',
         description: "Attach an add-on to an existing booking",
         routing: {
           request: {
