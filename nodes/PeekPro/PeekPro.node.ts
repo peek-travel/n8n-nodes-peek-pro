@@ -46,36 +46,36 @@ export class PeekPro implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Account',
+						value: resourceAccount,
+					},
+					{
 						name: 'Booking',
 						value: 'booking',
+					},
+					{
+						name: 'Daily Note',
+						value: resourceDailyNote,
 					},
 					{
 						name: 'Product',
 						value: resourceProduct,
 					},
 					{
-						name: 'Timeslot',
-						value: resourceTimeslot,
-					},
-					{
-						name: 'Account',
-						value: resourceAccount,
-					},
-					{
-						name: 'User',
-						value: resourceUser,
+						name: 'Promo Code',
+						value: resourcePromoCode,
 					},
 					{
 						name: 'Reseller',
 						value: resourceReseller,
 					},
 					{
-						name: 'Promo Code',
-						value: resourcePromoCode,
+						name: 'Timeslot',
+						value: resourceTimeslot,
 					},
 					{
-						name: 'Daily Note',
-						value: resourceDailyNote,
+						name: 'User',
+						value: resourceUser,
 					},
 				],
 				default: 'booking',

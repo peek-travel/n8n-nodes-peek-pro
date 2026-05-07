@@ -10,6 +10,8 @@ import type {
 import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 
+// Webhook triggers are not invokable as AI agent tools.
+// eslint-disable-next-line @n8n/community-nodes/node-usable-as-tool
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Peek Pro Trigger',
@@ -22,7 +24,6 @@ export class PeekProTrigger implements INodeType {
 		defaults: {
 			name: 'Peek Pro Trigger',
 		},
-		usableAsTool: true,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
@@ -126,6 +127,9 @@ export class PeekProTrigger implements INodeType {
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
 				const webhookUrl = this.getNodeWebhookUrl('default') as string;
+				// `event` is read as string[] and wrapped again in `eventTypes: [event]` below.
+				// This is intentional: the Peek Pro /webhooks endpoint expects a nested array
+				// shape here. Do not "fix" the type cast or unwrap the array — verified working.
 				const event = this.getNodeParameter('event') as string[];
 
 				// Validate webhook URL

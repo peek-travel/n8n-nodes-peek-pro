@@ -56,11 +56,11 @@ export const bookingMakePaymentDescription: INodeProperties[] = [
   },
   {
     displayName: 'Live Mode',
-		name: 'liveMode',
-		type: "boolean",
+    name: 'liveMode',
+    type: "boolean",
     displayOptions: { show: showOnlyForBookingMakePayment },
-		default: false,
-		description: 'Whether to make a real charge. When false, this is a dry run (no charge).',
+    default: false,
+    description: 'Whether to make a real charge. When false, this is a dry run (no charge).',
   },
   {
     displayName: "Customer Message",

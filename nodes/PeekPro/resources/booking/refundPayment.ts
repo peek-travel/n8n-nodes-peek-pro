@@ -56,10 +56,10 @@ export const bookingRefundPaymentDescription: INodeProperties[] = [
   },
   {
     displayName: 'Live Mode',
-		name: 'liveMode',
-		type: "boolean",
+    name: 'liveMode',
+    type: "boolean",
     displayOptions: { show: showOnlyForBookingRefundPayment },
-		default: false,
-		description: 'Whether to make a real refund. When false, this is a dry run (no refund).',
+    default: false,
+    description: 'Whether to make a real refund. When false, this is a dry run (no refund).',
   },
 ];

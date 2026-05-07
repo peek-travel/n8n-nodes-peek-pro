@@ -14,13 +14,14 @@ export const bookingGetTimeslotDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForBookingGetTimeslot },
     default: "",
     description: "The ID of the timeslot for which to find bookings",
+    required: true,
   },
   {
     displayName: 'Include Guest Details (From Waivers)',
-		name: 'includeGuests',
-		type: "boolean",
+    name: 'includeGuests',
+    type: "boolean",
     displayOptions: { show: showOnlyForBookingGetTimeslot },
-		default: false,
-		description: 'Whether to include guest details from waivers',
+    default: false,
+    description: 'Whether to include guest details from waivers',
   },
 ];
