@@ -1,6 +1,5 @@
 # Node & package management
 node_modules/
-package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
