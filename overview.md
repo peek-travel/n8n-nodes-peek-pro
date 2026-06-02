@@ -38,6 +38,15 @@
 
 ---
 
+### Membership
+
+| Action | Description | Parameters |
+|--------|-------------|------------|
+| Get All | List all membership variants configured on the account (one item per variant) | _(none)_ |
+| Create | Purchase a membership for a customer | `membershipVariantId` (required): string — the `membershipVariantId` from Get All<br>`email` (required): string — valid email format<br>`importId` (required): string — idempotency key; stable unique ID for this purchase (re-sending will not create a second membership)<br>**Additional Fields** (optional collection, only sent when provided):<br>`country`: string — 2-letter country code (e.g. `US`)<br>`address`: string — customer's formatted address<br>`membershipCode`: string — desired membership code<br>`phone`: string — formatted phone (e.g. `+14155555555`)<br>`customerName`: string — customer's name |
+
+---
+
 ### Product
 
 | Action | Description | Parameters |
