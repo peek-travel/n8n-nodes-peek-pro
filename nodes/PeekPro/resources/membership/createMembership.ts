@@ -44,6 +44,13 @@ export const membershipCreateDescription: INodeProperties[] = [
     default: {},
     options: [
       {
+        displayName: "Address",
+        name: "address",
+        type: "string",
+        default: "",
+        description: "The customer's formatted address",
+      },
+      {
         displayName: "Country",
         name: "country",
         type: "string",
@@ -52,11 +59,11 @@ export const membershipCreateDescription: INodeProperties[] = [
         description: "The 2 letter country code of the customer (e.g. 'US' for the United States)",
       },
       {
-        displayName: "Address",
-        name: "address",
+        displayName: "Customer Name",
+        name: "customerName",
         type: "string",
         default: "",
-        description: "The customer's formatted address",
+        description: "The customer's name",
       },
       {
         displayName: "Membership Code",
@@ -72,13 +79,6 @@ export const membershipCreateDescription: INodeProperties[] = [
         placeholder: '+14155555555',
         default: "",
         description: "The customer's formatted phone number (e.g. +14155555555)",
-      },
-      {
-        displayName: "Customer Name",
-        name: "customerName",
-        type: "string",
-        default: "",
-        description: "The customer's name",
       },
     ],
   },
