@@ -66,11 +66,11 @@ export const membershipCreateDescription: INodeProperties[] = [
         description: "The customer's name",
       },
       {
-        displayName: "Membership Code",
+        displayName: "Membership Redemption Code",
         name: "membershipCode",
         type: "string",
         default: "",
-        description: "The desired membership code",
+        description: "The desired code used by the customer",
       },
       {
         displayName: "Phone",
