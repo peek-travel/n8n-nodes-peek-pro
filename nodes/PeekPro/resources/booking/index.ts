@@ -8,9 +8,12 @@ import {
   actionBookingGetInvoiceLink,
   actionBookingGetOne,
   actionBookingGetPaymentsOnFile,
+  actionBookingGetGuests,
   actionBookingGetTimeslot,
+  actionBookingListAddons,
   actionBookingMakePayment,
   actionBookingRefundPayment,
+  actionBookingRemoveAddon,
   actionBookingUpdateCheckin,
   actionBookingUpdateNotes,
   resourceBooking,
@@ -25,6 +28,9 @@ import { bookingMakePaymentDescription } from './makePayment';
 import { bookingRefundPaymentDescription } from './refundPayment';
 import { bookingGetInvoiceLinkDescription } from './getInvoiceLink';
 import { bookingAddAddonDescription } from './addAddon';
+import { bookingRemoveAddonDescription } from './removeAddon';
+import { bookingListAddonsDescription } from './listAddons';
+import { bookingGetGuestsDescription } from './getGuests';
 
 const showOnlyForBookings = {
   resource: [resourceBooking],
@@ -215,6 +221,49 @@ export const bookingDescription: INodeProperties[] = [
         },
       },
       {
+        name: "Remove Add-On",
+        value: actionBookingRemoveAddon,
+        action: 'Remove an addon from a booking',
+        description: "Cancel an add-on on an existing booking",
+        routing: {
+          request: {
+            method: "POST",
+            url: '=/bookings/{{$parameter.bookingId}}/remove-addons',
+            body: {
+              addonOptionId: '={{$parameter["addonOptionId"]}}',
+              quantity: '={{$parameter["quantity"]}}',
+            },
+          },
+        },
+      },
+      {
+        name: "Get All Add-Ons",
+        value: actionBookingListAddons,
+        action: 'Get all addons on a booking',
+        description: "Get the add-ons attached to a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/list-addons',
+            qs: {
+              showInternal: '={{$parameter["showInternal"]}}',
+            },
+          },
+        },
+      },
+      {
+        name: "Get All Guests",
+        value: actionBookingGetGuests,
+        action: "Get all guests on a booking",
+        description: "Get the guest list for a booking",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/bookings/{{$parameter.bookingId}}/guests',
+          },
+        },
+      },
+      {
         name: "Create Booking",
         value: actionBookingCreateBooking,
         action: "Create a new booking",
@@ -261,4 +310,7 @@ export const bookingDescription: INodeProperties[] = [
   ...bookingRefundPaymentDescription,
   ...bookingGetInvoiceLinkDescription,
   ...bookingAddAddonDescription,
+  ...bookingRemoveAddonDescription,
+  ...bookingListAddonsDescription,
+  ...bookingGetGuestsDescription,
 ];

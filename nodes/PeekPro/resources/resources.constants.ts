@@ -7,6 +7,7 @@ export const resourceDailyNote = 'dailyNote';
 export const resourceReseller = 'reseller';
 export const resourcePromoCode = 'promoCode';
 export const resourceMembership = 'membership';
+export const resourceLog = 'log';
 
 export const actionBookingGetOne = 'get: booking';
 export const actionBookingGetRange = 'getMany: bookings (dates)';
@@ -20,6 +21,9 @@ export const actionBookingMakePayment = 'create: booking payment';
 export const actionBookingRefundPayment = 'create: booking refund';
 export const actionBookingGetInvoiceLink = 'get: booking invoice link';
 export const actionBookingAddAddon = 'create: booking addon';
+export const actionBookingRemoveAddon = 'delete: booking addon';
+export const actionBookingListAddons = 'getAll: booking addons';
+export const actionBookingGetGuests = 'getAll: booking guests';
 
 export const actionUserGetOne = 'get: user';
 export const actionUserGetAll = 'getAll: users';
@@ -37,6 +41,7 @@ export const actionTimeslotSetGuide = 'set: timeslot guide';
 
 export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';
+export const actionProductGetReviews = 'getAll: product reviews';
 
 export const actionResellerGetAll = 'getAll: reseller';
 
@@ -45,3 +50,5 @@ export const actionPromoCodeCreate = 'create: promoCode';
 
 export const actionMembershipGetAll = 'getAll: memberships';
 export const actionMembershipCreate = 'create: membership';
+
+export const actionLogCreate = 'create: log';
