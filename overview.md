@@ -25,6 +25,9 @@
 | Refund Payment | Refund a payment on a booking | `bookingId` (required): string<br>`paymentId` (required): string — must start with `"pmt_"`<br>`amount` (required): string — e.g. `"1.00"`<br>`currency` (required): string — 3-letter code, e.g. `"USD"` (default: `"USD"`)<br>`idempotencyKey` (required): string — unique key to prevent duplicate refunds<br>`liveMode` (required): boolean (default: `false`) — `false` = dry run, `true` = real refund |
 | Make Payment | Charge a saved payment source for a booking | `bookingId` (required): string<br>`paymentSourceId` (required): string — must start with `"ps_"`<br>`amount` (required): string — e.g. `"50.00"`<br>`currency` (required): string — 3-letter code, e.g. `"USD"` (default: `"USD"`)<br>`idempotencyKey` (required): string — unique key to prevent duplicate charges<br>`liveMode` (required): boolean (default: `false`) — `false` = dry run, `true` = real charge<br>`customerMessage` (optional): string — message appended to charge description |
 | Add Add-On | Attach an add-on to an existing booking | `bookingId` (required): string<br>`addonId` (required): string<br>`quantity` (required): string — e.g. `"4"` |
+| Remove Add-On | Cancel an add-on on an existing booking | `bookingId` (required): string<br>`addonOptionId` (required): string — the `addonOptionId` from Get All Add-Ons<br>`quantity` (required): string — e.g. `"1"` |
+| Get All Add-Ons | List the add-ons attached to a booking | `bookingId` (required): string<br>`showInternal` (optional): boolean (default: `false`) — return the detailed internal add-on model instead of the grouped result |
+| Get All Guests | List the guests on a booking | `bookingId` (required): string |
 | Create Booking | Create a new booking from an external system | `externalId` (required): string — unique import ID from external system<br>`product` (required): string — product name or ID<br>`tickets` (required): string — e.g. `"2x Adult, 1x Child"` (must match Peek Pro ticket types exactly)<br>`date` (required): dateTime<br>`start` (required): string — local time, e.g. `"4:30pm"`<br>`end` (required): string — local time, e.g. `"5:30pm"`<br>`customerName` (required): string<br>`email` (optional): string<br>`phone` (optional): string — e.g. `"+15555555555"`<br>`notes` (optional): string<br>`postalCode` (optional): string<br>`country` (optional): string — 2-letter code, e.g. `"US"`<br>`optinMarketing` (optional): boolean (default: `false`)<br>`optinSms` (optional): boolean (default: `false`)<br>`shouldSendEmails` (optional): boolean (default: `false`)<br>`markBookingAsPaid` (optional): boolean (default: `false`)<br>`parentOrderId` (optional): string — order ID to add this booking to (starts with `"O-"` or `"o_"`)<br>`partialPaymentAmount` (optional, visible when `markBookingAsPaid` is `true`): string — partial payment amount to apply |
 
 ---
@@ -35,6 +38,14 @@
 |--------|-------------|------------|
 | Get Today's Note | Retrieve today's daily note | _(none)_ |
 | Set Today's Note | Create or replace today's daily note | `note` (required): string |
+
+---
+
+### Log
+
+| Action | Description | Parameters |
+|--------|-------------|------------|
+| Create Log Entry | Record a workflow error or info entry in the operator's Autopilot audit log | `message` (required): string — capped at 2000 characters<br>`level` (optional): `error` \| `info` (default: `info`)<br>`source` (optional): string — workflow name/identifier shown as the entry's resource ID, capped at 200 characters |
 
 ---
 
@@ -53,6 +64,7 @@
 |--------|-------------|------------|
 | Get All | List all products | _(none)_ |
 | Get One | Retrieve a single product by ID | `productId` (required): string |
+| Get All Reviews | List customer reviews for a product (activity), newest first | `productId` (required): string<br>`reviewCount` (optional): number — 1–50 (default: `50`)<br>`reviewOffset` (optional): number — newest reviews to skip (default: `0`) |
 
 ---
 
