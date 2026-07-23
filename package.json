@@ -17,13 +17,14 @@
     "url": "git+https://github.com/peek-travel/n8n-nodes-peek-pro.git"
   },
   "scripts": {
-    "build": "n8n-node build",
+    "validate": "node scripts/validate-n8n.mjs",
+    "build": "npm run validate && n8n-node build",
     "build:watch": "tsc --watch",
     "dev": "n8n-node dev",
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
     "release": "n8n-node release",
-    "prepublishOnly": "n8n-node prerelease"
+    "prepublishOnly": "npm run validate && n8n-node prerelease"
   },
   "files": [
     "dist"

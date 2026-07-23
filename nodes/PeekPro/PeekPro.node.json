@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-base.peekPro",
+	"node": "n8n-nodes-peek-pro.peekPro",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Development", "Developer Tools"],
+	"categories": ["Development"],
 	"resources": {
 		"credentialDocumentation": [
 			{
