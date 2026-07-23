@@ -5,7 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run build          # compile TypeScript → dist/
+npm run validate       # check nodes against n8n review guidelines
+npm run build          # validate, then compile TypeScript → dist/
 npm run build:watch    # watch mode (tsc --watch)
 npm run lint           # ESLint via n8n-node lint
 npm run lint:fix       # auto-fix lint errors
@@ -14,6 +15,16 @@ npm run release        # cut a release with release-it
 ```
 
 There are no tests in this repository.
+
+## n8n review compliance
+
+n8n re-reviews every published version. `scripts/validate-n8n.mjs` enforces the
+mechanical guidelines that have caused rejections (codex `node` prefix, allowed
+`categories`, `usableAsTool: true`, codex↔node pairing). It runs on
+`npm run build` and `prepublishOnly`, so a non-compliant package cannot be
+published. When n8n flags a new issue, add a check to that script — see the
+`n8n-guidelines` skill (`.claude/skills/n8n-guidelines/`) for the full rule list
+and workflow.
 
 ## Architecture
 

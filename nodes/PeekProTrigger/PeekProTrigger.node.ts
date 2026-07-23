@@ -10,8 +10,6 @@ import type {
 import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 
-// Webhook triggers are not invokable as AI agent tools.
-// eslint-disable-next-line @n8n/community-nodes/node-usable-as-tool
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Peek Pro Trigger',
@@ -19,6 +17,7 @@ export class PeekProTrigger implements INodeType {
 		icon: { light: 'file:peekPro.svg', dark: 'file:peekPro.dark.svg' },
 		group: ['trigger'],
 		version: 1,
+		usableAsTool: true,
 		subtitle: '={{$parameter["event"] || "No event selected"}}',
 		description: 'Starts the workflow when Peek Pro event occur (e.g., new bookings)',
 		defaults: {
