@@ -173,7 +173,7 @@ export const bookingCreateDescription: INodeProperties[] = [
     displayOptions: { show: showOnlyForBookingCreate },
     default: {},
     description:
-      "Answers to the product's custom questions. Run Products → Get Custom Questions first to get the question and option IDs; answer only questions that exist on the product, and every one marked required. Per-guest questions are not supported.",
+      "Answers to the custom questions. Only questions that exist on the product are valid.",
     options: [
       {
         name: 'answer',
