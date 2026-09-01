@@ -291,6 +291,7 @@ export const bookingDescription: INodeProperties[] = [
               markBookingAsPaid: '={{$parameter["markBookingAsPaid"]}}',
               partialPaymentAmount: '={{$parameter["partialPaymentAmount"]}}',
               parentOrderId: '={{$parameter["parentOrderId"]}}',
+              customQuestionAnswers: '={{ $parameter["customQuestionAnswers"].answer }}',
             },
           },
         },

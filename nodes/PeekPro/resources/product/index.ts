@@ -1,11 +1,13 @@
 import type { INodeProperties } from 'n8n-workflow';
 import {
+  actionProductGetCustomQuestions,
   actionProductGetOne,
   actionProductGetReviews,
   resourceProduct,
 } from '../resources.constants';
 import { productGetDescription } from './getProduct';
 import { productGetReviewsDescription } from './getReviews';
+import { productGetCustomQuestionsDescription } from './getCustomQuestions';
 
 const showOnlyForProducts = {
   resource: [resourceProduct],
@@ -61,9 +63,22 @@ export const productDescription: INodeProperties[] = [
           },
         },
       },
+      {
+        name: "Get Custom Questions",
+        value: actionProductGetCustomQuestions,
+        action: "Get all custom questions for a product",
+        description: "Get the custom questions configured on a product. Use these IDs when answering questions on Create Booking.",
+        routing: {
+          request: {
+            method: "GET",
+            url: '=/products/{{$parameter.productId}}/custom-questions',
+          },
+        },
+      },
     ],
     default: 'getAll: products',
   },
   ...productGetDescription,
   ...productGetReviewsDescription,
+  ...productGetCustomQuestionsDescription,
 ];

@@ -164,4 +164,40 @@ export const bookingCreateDescription: INodeProperties[] = [
     default: "",
     description: 'The partial payment amount to apply to the booking',
   },
+  {
+    displayName: 'Custom Question Answers',
+    name: 'customQuestionAnswers',
+    type: 'fixedCollection',
+    typeOptions: { multipleValues: true },
+    placeholder: 'Add Answer',
+    displayOptions: { show: showOnlyForBookingCreate },
+    default: {},
+    description:
+      "Answers to the custom questions. Only questions that exist on the product are valid.",
+    options: [
+      {
+        name: 'answer',
+        displayName: 'Answer',
+        values: [
+          {
+            displayName: 'Question ID or Text',
+            name: 'questionIdOrText',
+            type: 'string',
+            default: '',
+            description: "The question to answer, given as its ID (cq_…) or its exact question text",
+            required: true,
+          },
+          {
+            displayName: 'Value',
+            name: 'value',
+            type: 'string',
+            default: '',
+            description:
+              "The answer. For TEXT use free text; for CHECK_BOX use 'yes' or 'no'; for SELECT_ONE or LOCATION use one of that question's option IDs (cqao_…) or the option's value label.",
+            required: true,
+          },
+        ],
+      },
+    ],
+  },
 ];
