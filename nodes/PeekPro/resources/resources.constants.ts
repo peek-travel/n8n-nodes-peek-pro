@@ -42,6 +42,7 @@ export const actionTimeslotSetGuide = 'set: timeslot guide';
 export const actionProductGetAll = 'getAll: products';
 export const actionProductGetOne = 'get: product';
 export const actionProductGetReviews = 'getAll: product reviews';
+export const actionProductGetCustomQuestions = 'getAll: product custom questions';
 
 export const actionResellerGetAll = 'getAll: reseller';
 
