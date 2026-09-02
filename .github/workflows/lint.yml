@@ -1,0 +1,41 @@
+# Gates every pull request with the n8n community-node review rules BEFORE merge.
+#
+# The n8n reviewer lints published packages with `@n8n/node-cli@latest`, and its
+# rules change between versions (e.g. `usableAsTool` on trigger nodes: an older
+# rule wanted it, the current one forbids it — this rejected 0.4.4). The pinned
+# devDep in package.json inevitably lags, so a green local `npm run lint` can
+# still hide a rejection. This job runs the reviewer's EXACT current rules via
+# `npx @n8n/node-cli@latest lint`, so a PR that n8n would reject goes red here
+# instead of after publish. Keep it a required check on the default branch.
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    name: n8n review lint (@latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Mechanical guideline checks (codex prefix, categories, usableAsTool
+      # action/trigger split, codex↔node pairing, package.json references).
+      - name: Validate n8n guidelines
+        run: npm run validate
+
+      # Authoritative lint using the reviewer's exact current ruleset. Not the
+      # pinned devDep — @latest, so a new/flipped rule fails the PR immediately.
+      - name: Lint with @n8n/node-cli@latest
+        run: npx --yes @n8n/node-cli@latest lint

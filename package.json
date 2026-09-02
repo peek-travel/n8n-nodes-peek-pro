@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-peek-pro",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "n8n community node to work with the Example API",
   "license": "MIT",
   "homepage": "https://github.com/peek-travel/n8n-nodes-peek-pro#readme",
@@ -24,7 +24,7 @@
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
     "release": "n8n-node release",
-    "prepublishOnly": "npm run validate && n8n-node prerelease"
+    "prepublishOnly": "npm run validate && npx @n8n/node-cli@latest lint && n8n-node prerelease"
   },
   "files": [
     "dist"
@@ -43,7 +43,7 @@
     "n8n-workflow": "*"
   },
   "devDependencies": {
-    "@n8n/node-cli": "^0.29.1",
+    "@n8n/node-cli": "^0.46.2",
     "eslint": "^9.39.4",
     "prettier": "^3.8.3",
     "release-it": "^20.0.1",

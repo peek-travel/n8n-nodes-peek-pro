@@ -11,8 +11,10 @@
  *   2. `<nodeName>` in the codex must match the `name` in the sibling *.node.ts.
  *   3. Codex `categories` may only contain values from n8n's allowed list.
  *   4. Every *.node.ts needs a matching *.node.json codex, and vice-versa.
- *   5. Every node's INodeTypeDescription must set `usableAsTool: true` so it
- *      can be used as an AI tool.
+ *   5. Every *action* node's INodeTypeDescription must set `usableAsTool: true`
+ *      so it can be used as an AI tool. Trigger nodes (group `trigger`) must NOT
+ *      set it — the n8n linter rejects `usableAsTool` on triggers because they
+ *      cannot be invoked as AI tools.
  *   6. Every file referenced in package.json `n8n.nodes`/`n8n.credentials`
  *      must have a corresponding TypeScript source file.
  *
@@ -67,8 +69,16 @@ const codexFiles = walk(nodesDir, '.node.json');
 for (const tsFile of nodeTsFiles) {
 	const src = readFileSync(tsFile, 'utf8');
 
-	// Rule 5: usableAsTool: true present.
-	if (!/usableAsTool:\s*true/.test(src)) {
+	// A trigger node declares `group: ['trigger']` in its description.
+	const isTrigger = /group:\s*\[\s*'trigger'\s*\]/.test(src);
+	const hasUsableAsTool = /usableAsTool:\s*true/.test(src);
+
+	// Rule 5: action nodes must set usableAsTool: true; trigger nodes must not.
+	if (isTrigger) {
+		if (hasUsableAsTool) {
+			err(tsFile, "trigger nodes must NOT set `usableAsTool: true` — the n8n linter rejects it because triggers cannot be invoked as AI tools");
+		}
+	} else if (!hasUsableAsTool) {
 		err(tsFile, "missing `usableAsTool: true` in the node description (required so the node can be used as an AI tool)");
 	}
 

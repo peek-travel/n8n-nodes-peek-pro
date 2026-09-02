@@ -28,8 +28,10 @@ npm run validate
    no "Trigger".
 4. **Codex ↔ node pairing** — every `*.node.ts` needs a matching `*.node.json`
    and vice-versa (same base filename).
-5. **`usableAsTool: true`** — every node's `INodeTypeDescription` must set it,
-   including trigger nodes, so the node can be used as an AI tool.
+5. **`usableAsTool: true`** — **action** nodes' `INodeTypeDescription` must set
+   it so they can be used as AI tools. **Trigger** nodes (`group: ['trigger']`)
+   must NOT set it — n8n's linter rejects `usableAsTool` on triggers because they
+   cannot be invoked as AI tools (this rejected 0.4.4).
 6. **package.json references resolve** — every path in `n8n.nodes` /
    `n8n.credentials` must have a corresponding TypeScript source file.
 
@@ -38,9 +40,18 @@ Reference: https://docs.n8n.io/connect/create-nodes/build-your-node/reference/co
 ## When you add or change a node
 
 - Add/adjust the `.node.json` codex to satisfy rules 1–4.
-- Keep `usableAsTool: true` in the node description (rule 5).
-- Run `npm run validate`, then `npm run build` and `npm run lint`.
+- Keep `usableAsTool: true` on action nodes; never set it on trigger nodes (rule 5).
+- Run `npm run validate`, then `npm run build` and `npm run lint`. Lint mirrors
+  n8n's `npx @n8n/scan-community-package`, so a lint failure = review rejection.
 - Update `overview.md` per the Overview Tracking section of `CLAUDE.md`.
+
+**Linter version skew.** The reviewer lints with `@n8n/node-cli@latest`; the
+pinned devDep lags (a `^0.x` caret can't cross minor versions). Rules flip
+between versions — e.g. old `node-usable-as-tool` *wanted* `usableAsTool` on
+triggers, current one *forbids* it (this rejected 0.4.4). `prepublishOnly`
+therefore runs `npx @n8n/node-cli@latest lint`, so the publish gate always uses
+the reviewer's exact rules even when the local pinned linter is stale. Bump the
+pinned `@n8n/node-cli` devDep toward latest periodically.
 
 ## Adding a new guideline
 
