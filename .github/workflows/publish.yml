@@ -86,6 +86,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Backstop: run the reviewer's exact current rules before publishing, so a
+      # rejection blocks the release even if the pinned devDep lags or the
+      # prepublishOnly hook is bypassed. Mirrors the PR lint gate (lint.yml).
+      - name: Lint with @n8n/node-cli@latest
+        run: |
+          npm run validate
+          npx --yes @n8n/node-cli@latest lint
+
       - name: Release
         # Publishes to npm with a provenance attestation (requires id-token: write above).
         # Lint and build run automatically as part of the release process.
