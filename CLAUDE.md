@@ -26,6 +26,29 @@ published. When n8n flags a new issue, add a check to that script — see the
 `n8n-guidelines` skill (`.claude/skills/n8n-guidelines/`) for the full rule list
 and workflow.
 
+### `usableAsTool` rules (action vs trigger)
+
+`usableAsTool: true` is **required on action nodes** (`PeekPro`) but **forbidden
+on trigger nodes** (`PeekProTrigger`). n8n's linter rejects `usableAsTool` on any
+node in `group: ['trigger']` because triggers cannot be invoked as AI tools —
+setting it pollutes the tool picker (this rejected 0.4.4). `validate-n8n.mjs`
+enforces both directions: action nodes must set it, trigger nodes must not.
+
+**Before publishing, always run `npm run lint`** (`n8n-node lint`). It runs the
+same ruleset as n8n's `npx @n8n/scan-community-package`, so lint failures locally
+= review rejection. `npm run validate` and `npm run lint` must both be green
+before cutting a release.
+
+**Linter version skew — the trap that rejected 0.4.4.** The n8n reviewer lints
+with `@n8n/node-cli@latest`, but the pinned devDep lags (a caret on a `0.x`
+version can't cross minor versions, so `^0.29.x` never auto-upgrades to `0.46`).
+The old plugin's `node-usable-as-tool` rule *wanted* `usableAsTool` on triggers;
+the current one *forbids* it — opposite verdicts. So `prepublishOnly` runs
+`npx @n8n/node-cli@latest lint` explicitly: the publish gate always uses the
+reviewer's exact rules regardless of the pinned devDep, so a stale local linter
+can never hide a rejection. The pinned devDep still serves fast day-to-day
+`npm run lint`; bump it toward latest periodically to keep the two in sync.
+
 ## Architecture
 
 This is an **n8n community node package** exposing two nodes:

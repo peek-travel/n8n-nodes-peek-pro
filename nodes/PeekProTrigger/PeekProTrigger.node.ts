@@ -17,7 +17,6 @@ export class PeekProTrigger implements INodeType {
 		icon: { light: 'file:peekPro.svg', dark: 'file:peekPro.dark.svg' },
 		group: ['trigger'],
 		version: 1,
-		usableAsTool: true,
 		subtitle: '={{$parameter["event"] || "No event selected"}}',
 		description: 'Starts the workflow when Peek Pro event occur (e.g., new bookings)',
 		defaults: {
