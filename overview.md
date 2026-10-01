@@ -65,6 +65,7 @@
 | Get All | List all products | _(none)_ |
 | Get One | Retrieve a single product by ID | `productId` (required): string |
 | Get All Reviews | List customer reviews for a product (activity), newest first | `productId` (required): string<br>`reviewCount` (optional): number — 1–50 (default: `50`)<br>`reviewOffset` (optional): number — newest reviews to skip (default: `0`) |
+| Get Review Summaries | Aggregate customer-review statistics for every product (activity), one entry per product; products with no reviews are included with `avgRating: null` and zero counts | _(none)_ |
 | Get Custom Questions | List the custom questions configured on a product (activity); returns question and option IDs used when answering on Create Booking | `productId` (required): string |
 
 ---

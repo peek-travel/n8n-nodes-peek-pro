@@ -3,6 +3,7 @@ import {
   actionProductGetCustomQuestions,
   actionProductGetOne,
   actionProductGetReviews,
+  actionProductGetReviewSummaries,
   resourceProduct,
 } from '../resources.constants';
 import { productGetDescription } from './getProduct';
@@ -32,6 +33,18 @@ export const productDescription: INodeProperties[] = [
           request: {
             method: "GET",
             url: "/products",
+          },
+        },
+      },
+      {
+        name: "Get Review Summaries",
+        value: actionProductGetReviewSummaries,
+        action: "Get review summaries for all products",
+        description: "Get aggregate customer-review statistics for every product, one entry per product",
+        routing: {
+          request: {
+            method: "GET",
+            url: "/products/review-summaries",
           },
         },
       },
