@@ -292,7 +292,7 @@ export const bookingDescription: INodeProperties[] = [
               partialPaymentAmount: '={{$parameter["partialPaymentAmount"]}}',
               parentOrderId: '={{$parameter["parentOrderId"]}}',
               customQuestionAnswers:
-                '={{ ($parameter["customQuestionAnswers"].answer || []).map(a => ({ questionIdOrText: $evaluateExpression(a.questionIdOrText), value: $evaluateExpression(a.value) })) }}',
+                '={{ ($parameter["customQuestionAnswers"].answer || []).map(a => ({ questionIdOrText: String($evaluateExpression(a.questionIdOrText)).replace(/^=/, ""), value: String($evaluateExpression(a.value)).replace(/^=/, "") })) }}',
             },
           },
         },
