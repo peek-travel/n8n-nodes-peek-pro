@@ -165,6 +165,16 @@ export const bookingCreateDescription: INodeProperties[] = [
     description: 'The partial payment amount to apply to the booking',
   },
   {
+    displayName: 'List Price',
+    name: 'listPrice',
+    type: "string",
+    displayOptions: { show: showOnlyForBookingCreate },
+    default: "",
+    placeholder: '100.00',
+    description:
+      "Override the booking's list price. Leave blank to use the product's default pricing. Enter as a string — formatted values like \"1,000\" or \"10.00\" are accepted.",
+  },
+  {
     displayName: 'Custom Question Answers',
     name: 'customQuestionAnswers',
     type: 'fixedCollection',
