@@ -8,6 +8,7 @@ export const resourceReseller = 'reseller';
 export const resourcePromoCode = 'promoCode';
 export const resourceMembership = 'membership';
 export const resourceLog = 'log';
+export const resourceCustomQuestion = 'customQuestion';
 
 export const actionBookingGetOne = 'get: booking';
 export const actionBookingGetRange = 'getMany: bookings (dates)';
@@ -54,3 +55,5 @@ export const actionMembershipGetAll = 'getAll: memberships';
 export const actionMembershipCreate = 'create: membership';
 
 export const actionLogCreate = 'create: log';
+
+export const actionCustomQuestionGetAll = 'getAll: custom questions';
