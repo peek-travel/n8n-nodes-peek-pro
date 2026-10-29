@@ -6,6 +6,7 @@ import { bookingDescription } from './resources/booking';
 import { timeslotDescription } from './resources/timeslot';
 import {
 	resourceAccount,
+	resourceCustomQuestion,
 	resourceDailyNote,
 	resourceLog,
 	resourceMembership,
@@ -21,6 +22,7 @@ import { resellerDescription } from './resources/reseller';
 import { promoCodeDescription } from './resources/promoCode';
 import { membershipDescription } from './resources/membership';
 import { logDescription } from './resources/log';
+import { customQuestionDescription } from './resources/customQuestion';
 
 export class PeekPro implements INodeType {
 	description: INodeTypeDescription = {
@@ -56,6 +58,10 @@ export class PeekPro implements INodeType {
 					{
 						name: 'Booking',
 						value: 'booking',
+					},
+					{
+						name: 'Custom Question',
+						value: resourceCustomQuestion,
 					},
 					{
 						name: 'Daily Note',
@@ -102,6 +108,7 @@ export class PeekPro implements INodeType {
 			...resellerDescription,
 			...membershipDescription,
 			...logDescription,
+			...customQuestionDescription,
 		],
 	};
 }

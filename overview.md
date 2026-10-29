@@ -32,6 +32,14 @@
 
 ---
 
+### Custom Question
+
+| Action | Description | Parameters |
+|--------|-------------|------------|
+| Get All | List every custom question defined on the account across all activities (question definitions, not customer answers); returns question and option IDs used when answering on Create Booking | _(none)_ |
+
+---
+
 ### Daily Note
 
 | Action | Description | Parameters |
