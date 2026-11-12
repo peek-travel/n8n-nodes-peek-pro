@@ -27,8 +27,10 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
 
+      # Install scripts are skipped: lint, build and tests need no native module,
+      # and isolated-vm (a transitive dependency) does not compile on every Node LTS.
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       # Mechanical guideline checks (codex prefix, categories, usableAsTool
       # action/trigger split, codex↔node pairing, package.json references).
@@ -39,3 +41,6 @@ jobs:
       # pinned devDep — @latest, so a new/flipped rule fails the PR immediately.
       - name: Lint with @n8n/node-cli@latest
         run: npx --yes @n8n/node-cli@latest lint
+
+      - name: Unit tests
+        run: npm test
