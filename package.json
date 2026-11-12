@@ -23,6 +23,8 @@
     "dev": "n8n-node dev",
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
+    "test": "vitest run",
+    "test:types": "tsc -p tsconfig.test.json",
     "release": "n8n-node release",
     "prepublishOnly": "npm run validate && npx @n8n/node-cli@latest lint && n8n-node prerelease"
   },
@@ -47,6 +49,7 @@
     "eslint": "^9.39.4",
     "prettier": "^3.8.3",
     "release-it": "^20.0.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
   }
 }
