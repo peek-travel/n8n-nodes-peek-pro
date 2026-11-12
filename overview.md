@@ -120,6 +120,15 @@
 
 Registers a webhook with Peek Pro and fires whenever the selected event occurs. The node rejects localhost URLs and cleans up the webhook subscription when deactivated.
 
+**Signed events:** when the node registers the webhook, Peek Pro returns a signing secret. The node keeps it in the workflow static data. Each POST must have these headers:
+
+| Header | Value |
+|--------|-------|
+| `X-Peek-Timestamp` | Unix time in seconds |
+| `X-Peek-Signature` | `v1=` + hex HMAC-SHA256 of `<timestamp>.<raw body>`, with the signing secret as the key |
+
+The node returns HTTP 401 and does not start the workflow when the signature is missing or wrong, when the timestamp is more than 5 minutes from the current time, or when the same signed request comes a second time. A webhook that was registered with no signing secret is registered again when the workflow is activated. GET requests (health check and challenge) do not need a signature.
+
 **Output shape for each event:**
 
 ```json

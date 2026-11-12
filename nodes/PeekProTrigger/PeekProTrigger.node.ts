@@ -9,6 +9,7 @@ import type {
 } from 'n8n-workflow';
 import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
+import { verifySignature } from './verifySignature';
 
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -101,6 +102,23 @@ export class PeekProTrigger implements INodeType {
 					return false;
 				}
 
+				// A webhook with no stored signing secret is removed, so that create() registers it again.
+				if (typeof webhookData.webhookSecret !== 'string' || webhookData.webhookSecret === '') {
+					try {
+						await this.helpers.httpRequestWithAuthentication.call(this, 'peekProApi', {
+							method: 'DELETE',
+							url: `${PEEK_PRO_BASE_URL}/webhooks/${webhookData.webhookId}`,
+							headers: DEFAULT_HEADERS,
+							json: true,
+						});
+					} catch (error) {
+						this.logger?.warn(`Failed to delete webhook with no signing secret: ${error.message}`);
+					}
+					delete webhookData.webhookId;
+					delete webhookData.webhookSecret;
+					return false;
+				}
+
 				try {
 					const response = await this.helpers.httpRequestWithAuthentication.call(
 						this,
@@ -115,9 +133,11 @@ export class PeekProTrigger implements INodeType {
 
 					// Check if webhook still exists and is active
 					return response && response.active === true;
-				} catch {
-					// If webhook doesn't exist, clean up the stored ID
+				} catch (error) {
+					// If webhook doesn't exist, clean up the stored ID and secret
+					this.logger?.debug(`Webhook lookup failed: ${error.message}`);
 					delete webhookData.webhookId;
+					delete webhookData.webhookSecret;
 					return false;
 				}
 			},
@@ -183,8 +203,15 @@ export class PeekProTrigger implements INodeType {
 					});
 				}
 
-				// Store webhook ID for future reference
+				if (typeof responseData.secret !== 'string' || responseData.secret === '') {
+					throw new NodeApiError(this.getNode(), responseData as JsonObject, {
+						message: 'Webhook creation response did not contain a signing secret.',
+					});
+				}
+
+				// Store webhook ID and signing secret for future reference
 				webhookData.webhookId = responseData.id as string;
+				webhookData.webhookSecret = responseData.secret;
 				return true;
 			},
 
@@ -209,8 +236,9 @@ export class PeekProTrigger implements INodeType {
 						return false;
 					}
 
-					// Clean up stored webhook ID
+					// Clean up stored webhook ID and secret
 					delete webhookData.webhookId;
+					delete webhookData.webhookSecret;
 				}
 
 				return true;
@@ -246,6 +274,20 @@ export class PeekProTrigger implements INodeType {
 
 		// Handle POST requests (actual webhook event)
 		if (httpMethod === 'POST') {
+			const webhookData = this.getWorkflowStaticData('node');
+			const verification = verifySignature({
+				secret: webhookData.webhookSecret,
+				rawBody: (req as unknown as { rawBody?: unknown }).rawBody,
+				headers: headerData as Record<string, unknown>,
+				nowSeconds: Math.floor(Date.now() / 1000),
+			});
+
+			if (!verification.valid) {
+				const res = this.getResponseObject();
+				res.status(401).json({ error: 'Unauthorized', reason: verification.reason });
+				return { noWebhookResponse: true };
+			}
+
 			// Validate that we have data
 			if (!bodyData || (typeof bodyData === 'object' && Object.keys(bodyData).length === 0)) {
 				return { webhookResponse: 'OK' };

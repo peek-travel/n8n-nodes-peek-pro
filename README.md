@@ -39,6 +39,15 @@ This package supports:
 4. Configure the required fields
 5. Execute the node to verify everything is working
 
+## Trigger event signatures
+
+The Peek Pro Trigger node accepts only signed events.
+
+- When the workflow is activated, the node registers its webhook and stores the signing secret that Peek Pro returns. n8n keeps the secret in the workflow static data, so a workflow export includes it.
+- Each POST must have an `X-Peek-Timestamp` header and an `X-Peek-Signature` header (`v1=` + hex HMAC-SHA256 of `<timestamp>.<raw body>`).
+- The node returns HTTP 401 and does not start the workflow when the signature is missing or wrong, when the timestamp is more than 5 minutes old, or when the same request comes a second time.
+- A workflow that was activated with an older version registers its webhook again on the next activation.
+
 ## Requirements
 
 - Available for all current Peek Pro customers
