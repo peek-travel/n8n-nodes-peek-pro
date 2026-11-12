@@ -305,7 +305,13 @@ export class PeekProTrigger implements INodeType {
 
 			if (!verification.valid) {
 				const res = this.getResponseObject();
-				this.logger?.debug(`Peek Pro Trigger rejected a request: ${verification.reason}`);
+				const message = `Peek Pro Trigger rejected a request: ${verification.reason}`;
+				// A missing secret or raw body is a setup problem, not a bad request.
+				if (verification.reason === 'missing_secret' || verification.reason === 'missing_body') {
+					this.logger?.warn(message);
+				} else {
+					this.logger?.debug(message);
+				}
 				res.status(401).json({ error: 'Unauthorized' });
 				return { noWebhookResponse: true };
 			}

@@ -70,7 +70,11 @@ function expectRejected(outcome: Awaited<ReturnType<typeof run>>, reason: string
 	expect(outcome.result.workflowData).toBeUndefined();
 	expect(outcome.res.status).toHaveBeenCalledWith(401);
 	expect(outcome.res.json).toHaveBeenCalledWith({ error: 'Unauthorized' });
-	expect(outcome.logger.debug).toHaveBeenCalledWith(expect.stringContaining(reason));
+	const log =
+		reason === 'missing_secret' || reason === 'missing_body'
+			? outcome.logger.warn
+			: outcome.logger.debug;
+	expect(log).toHaveBeenCalledWith(expect.stringContaining(reason));
 }
 
 describe('PeekProTrigger.webhook', () => {
