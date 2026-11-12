@@ -28,7 +28,7 @@ export interface SignatureInput {
 }
 
 /**
- * Keeps the signatures that were accepted inside the tolerance window.
+ * Keeps the signatures that this n8n process accepted inside the tolerance window.
  * Expired entries are removed on each check. The size has a limit.
  */
 export class SeenSignatures {
@@ -38,8 +38,10 @@ export class SeenSignatures {
 
 	/** Returns false when the signature is already in the set. Else adds it and returns true. */
 	add(signature: string, expiresAt: number, nowSeconds: number): boolean {
+		// Entries are added in about the same order as they expire, so stop at the first live entry.
 		for (const [key, expiry] of this.entries) {
-			if (expiry <= nowSeconds) this.entries.delete(key);
+			if (expiry > nowSeconds) break;
+			this.entries.delete(key);
 		}
 		if (this.entries.has(signature)) return false;
 		while (this.entries.size >= this.maxEntries) {

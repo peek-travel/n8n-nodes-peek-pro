@@ -11,6 +11,25 @@ import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workf
 import { PEEK_PRO_BASE_URL, DEFAULT_HEADERS } from '../../constants/peekPro.constants';
 import { verifySignature } from './verifySignature';
 
+async function deleteRemoteWebhook(this: IHookFunctions, webhookId: unknown): Promise<void> {
+	await this.helpers.httpRequestWithAuthentication.call(this, 'peekProApi', {
+		method: 'DELETE',
+		url: `${PEEK_PRO_BASE_URL}/webhooks/${webhookId}`,
+		headers: DEFAULT_HEADERS,
+		json: true,
+	});
+}
+
+function clearStoredWebhook(webhookData: IDataObject): void {
+	delete webhookData.webhookId;
+	delete webhookData.webhookSecret;
+}
+
+function isNotFound(error: { httpCode?: unknown; statusCode?: unknown; response?: { status?: unknown } }): boolean {
+	const status = error?.httpCode ?? error?.statusCode ?? error?.response?.status;
+	return String(status) === '404';
+}
+
 export class PeekProTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Peek Pro Trigger',
@@ -105,17 +124,17 @@ export class PeekProTrigger implements INodeType {
 				// A webhook with no stored signing secret is removed, so that create() registers it again.
 				if (typeof webhookData.webhookSecret !== 'string' || webhookData.webhookSecret === '') {
 					try {
-						await this.helpers.httpRequestWithAuthentication.call(this, 'peekProApi', {
-							method: 'DELETE',
-							url: `${PEEK_PRO_BASE_URL}/webhooks/${webhookData.webhookId}`,
-							headers: DEFAULT_HEADERS,
-							json: true,
-						});
+						await deleteRemoteWebhook.call(this, webhookData.webhookId);
 					} catch (error) {
-						this.logger?.warn(`Failed to delete webhook with no signing secret: ${error.message}`);
+						if (!isNotFound(error)) {
+							// Keep the stored ID, so that the next activation can try the delete again.
+							throw new NodeOperationError(
+								this.getNode(),
+								`Failed to remove the webhook that has no signing secret: ${error.message}. Activate the workflow again.`,
+							);
+						}
 					}
-					delete webhookData.webhookId;
-					delete webhookData.webhookSecret;
+					clearStoredWebhook(webhookData);
 					return false;
 				}
 
@@ -134,10 +153,16 @@ export class PeekProTrigger implements INodeType {
 					// Check if webhook still exists and is active
 					return response && response.active === true;
 				} catch (error) {
-					// If webhook doesn't exist, clean up the stored ID and secret
-					this.logger?.debug(`Webhook lookup failed: ${error.message}`);
-					delete webhookData.webhookId;
-					delete webhookData.webhookSecret;
+					if (!isNotFound(error)) {
+						// Keep the stored ID and secret: the webhook can still exist.
+						throw new NodeOperationError(
+							this.getNode(),
+							`Failed to look up the webhook: ${error.message}`,
+						);
+					}
+					// The webhook does not exist: clean up the stored ID and secret
+					this.logger?.debug(`Webhook ${webhookData.webhookId} not found`);
+					clearStoredWebhook(webhookData);
 					return false;
 				}
 			},
@@ -204,6 +229,12 @@ export class PeekProTrigger implements INodeType {
 				}
 
 				if (typeof responseData.secret !== 'string' || responseData.secret === '') {
+					// Remove the webhook that was just registered, so that the next activation does not get a 409.
+					try {
+						await deleteRemoteWebhook.call(this, responseData.id);
+					} catch (error) {
+						this.logger?.warn(`Failed to remove webhook ${responseData.id}: ${error.message}`);
+					}
 					throw new NodeApiError(this.getNode(), responseData as JsonObject, {
 						message: 'Webhook creation response did not contain a signing secret.',
 					});
@@ -220,16 +251,7 @@ export class PeekProTrigger implements INodeType {
 
 				if (webhookData.webhookId !== undefined) {
 					try {
-						await this.helpers.httpRequestWithAuthentication.call(
-							this,
-							'peekProApi',
-							{
-								method: 'DELETE',
-								url: `${PEEK_PRO_BASE_URL}/webhooks/${webhookData.webhookId}`,
-								headers: DEFAULT_HEADERS,
-								json: true,
-							},
-						);
+						await deleteRemoteWebhook.call(this, webhookData.webhookId);
 					} catch (error) {
 						// Log error but don't fail - webhook might already be deleted
 						this.logger?.warn(`Failed to delete webhook: ${error.message}`);
@@ -237,8 +259,7 @@ export class PeekProTrigger implements INodeType {
 					}
 
 					// Clean up stored webhook ID and secret
-					delete webhookData.webhookId;
-					delete webhookData.webhookSecret;
+					clearStoredWebhook(webhookData);
 				}
 
 				return true;
@@ -277,14 +298,15 @@ export class PeekProTrigger implements INodeType {
 			const webhookData = this.getWorkflowStaticData('node');
 			const verification = verifySignature({
 				secret: webhookData.webhookSecret,
-				rawBody: (req as unknown as { rawBody?: unknown }).rawBody,
+				rawBody: req.rawBody,
 				headers: headerData as Record<string, unknown>,
 				nowSeconds: Math.floor(Date.now() / 1000),
 			});
 
 			if (!verification.valid) {
 				const res = this.getResponseObject();
-				res.status(401).json({ error: 'Unauthorized', reason: verification.reason });
+				this.logger?.debug(`Peek Pro Trigger rejected a request: ${verification.reason}`);
+				res.status(401).json({ error: 'Unauthorized' });
 				return { noWebhookResponse: true };
 			}
 

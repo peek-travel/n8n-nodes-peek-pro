@@ -38,7 +38,12 @@ describe('verifySignature', () => {
 	it('accepts a header value given as an array', () => {
 		const h = signedHeaders();
 		expect(
-			check({ headers: { [TIMESTAMP_HEADER]: [h[TIMESTAMP_HEADER]], [SIGNATURE_HEADER]: [h[SIGNATURE_HEADER]] } }),
+			check({
+				headers: {
+					[TIMESTAMP_HEADER]: [h[TIMESTAMP_HEADER]],
+					[SIGNATURE_HEADER]: [h[SIGNATURE_HEADER]],
+				},
+			}),
 		).toEqual({ valid: true });
 	});
 
@@ -87,12 +92,18 @@ describe('verifySignature', () => {
 
 	it('rejects a timestamp older than the tolerance window', () => {
 		const old = NOW - SIGNATURE_TOLERANCE_SECONDS - 1;
-		expect(check({ headers: signedHeaders(old) })).toEqual({ valid: false, reason: 'stale_timestamp' });
+		expect(check({ headers: signedHeaders(old) })).toEqual({
+			valid: false,
+			reason: 'stale_timestamp',
+		});
 	});
 
 	it('rejects a timestamp too far in the future', () => {
 		const future = NOW + SIGNATURE_TOLERANCE_SECONDS + 1;
-		expect(check({ headers: signedHeaders(future) })).toEqual({ valid: false, reason: 'stale_timestamp' });
+		expect(check({ headers: signedHeaders(future) })).toEqual({
+			valid: false,
+			reason: 'stale_timestamp',
+		});
 	});
 
 	it('accepts a timestamp at the edge of the tolerance window', () => {
@@ -103,17 +114,32 @@ describe('verifySignature', () => {
 	it('rejects the same signed request a second time', () => {
 		const seen = new SeenSignatures();
 		expect(check({ seen })).toEqual({ valid: true });
-		expect(check({ seen })).toEqual({ valid: false, reason: 'replayed_signature' });
+		expect(check({ seen })).toEqual({
+			valid: false,
+			reason: 'replayed_signature',
+		});
 	});
 
 	it('rejects a request when no secret is stored', () => {
-		expect(check({ secret: undefined })).toEqual({ valid: false, reason: 'missing_secret' });
-		expect(check({ secret: '' })).toEqual({ valid: false, reason: 'missing_secret' });
+		expect(check({ secret: undefined })).toEqual({
+			valid: false,
+			reason: 'missing_secret',
+		});
+		expect(check({ secret: '' })).toEqual({
+			valid: false,
+			reason: 'missing_secret',
+		});
 	});
 
 	it('rejects a request with no raw body', () => {
-		expect(check({ rawBody: undefined })).toEqual({ valid: false, reason: 'missing_body' });
-		expect(check({ rawBody: '{"a":1}' })).toEqual({ valid: false, reason: 'missing_body' });
+		expect(check({ rawBody: undefined })).toEqual({
+			valid: false,
+			reason: 'missing_body',
+		});
+		expect(check({ rawBody: '{"a":1}' })).toEqual({
+			valid: false,
+			reason: 'missing_body',
+		});
 	});
 });
 
