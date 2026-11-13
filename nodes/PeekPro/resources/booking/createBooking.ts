@@ -157,6 +157,15 @@ export const bookingCreateDescription: INodeProperties[] = [
     description: 'The order ID to add this booking to. A valid order ID starts with "O-" or "o_".',
   },
   {
+    displayName: 'Promo Code',
+    name: 'promoCode',
+    type: "string",
+    displayOptions: { show: showOnlyForBookingCreate },
+    default: "",
+    description:
+      'A discount code to apply to the quote. An invalid code fails creation. Cannot be sent together with "Add Booking to Existing Order" (the server rejects it). Leave blank to apply no code. Requires the operator to enable the "create booking with promo code" permission in their connector settings, otherwise the request is rejected.',
+  },
+  {
     displayName: 'Partial Payment Amount',
     name: 'partialPaymentAmount',
     type: "string",
